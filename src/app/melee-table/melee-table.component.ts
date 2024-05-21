@@ -129,10 +129,6 @@ export class MeleeTableComponent {
     this.strengthMod += strengthBon;
   }
 
-  toggleSecondAttack(event: any){
-    this.secondAttack = event.checked;
-  }
-
   togglePowerAttack(event: any){
     this.powerAttack = event.checked;
 
@@ -143,11 +139,12 @@ export class MeleeTableComponent {
     this.isHasted = event.checked;
 
     if (this.isHasted){
-      this.attackIterations.push({
-        "AttackNumber": 3,
-        "AttackPenalty": 0
-      })
+      let lastAttack: Attack = {
+        "AttackNumber": this.attackIterations[this.attackIterations.length-1].AttackNumber +1,
+        "AttackPenalty": this.attackIterations[0].AttackPenalty
+      }
 
+      this.attackIterations.push(lastAttack);
     }
     else {
       this.attackIterations.pop();
