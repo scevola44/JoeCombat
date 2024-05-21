@@ -1,4 +1,35 @@
+<h1>Joe Combat</h1>
 <table mat-table [dataSource]="dataSource">
-    <ng-container *ngFor="let col of displayedColumns" matColumnDef="{{col}}">
+    <ng-container matColumnDef="Arma">
+        <th mat-header-cell *matHeaderCellDef> Arma </th>
+        <td mat-cell *matCellDef="let attack"> {{attack.Name}} </td>
     </ng-container>
+    <ng-container matColumnDef="Attacco">
+        <th mat-header-cell *matHeaderCellDef> Attacco </th>
+        <td mat-cell *matCellDef="let attack"> {{calcAttackBonus(attack.AttackBonus)}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Danni">
+        <th mat-header-cell *matHeaderCellDef> Danni </th>
+        <td mat-cell *matCellDef="let attack"> {{attack.Damage}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Bonus">
+        <th mat-header-cell *matHeaderCellDef> Bonus Dmg </th>
+        <td mat-cell *matCellDef="let attack"> {{calcDamageBonus(attack.DamageBonus, attack.DmgMult)}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let attackRow; columns: displayedColumns;"></tr>
 </table>
+
+<mat-slide-toggle (change)="toggleBonus($event, 1, 1)">Inspire Courage</mat-slide-toggle>
+<mat-slide-toggle (change)="toggleBonus($event, 4, 0)">Z Flanking</mat-slide-toggle>
+<mat-slide-toggle (change)="toggleStrengthBonus($event, 2)">Focus Animale</mat-slide-toggle>
+<mat-slide-toggle (change)="togglePowerAttack($event)">Power Attack</mat-slide-toggle>
+<mat-slide-toggle (change)="toggleSecondAttack($event)">Second Attack</mat-slide-toggle>
+<mat-slide-toggle (change)="toggleLeadBlades($event)">Lead Blades</mat-slide-toggle>
+<mat-slide-toggle (change)="toggleElementalBody($event)">Corpo Elementale III</mat-slide-toggle>
+<div class="row">
+    <button mat-flat-button color="warn" (click)="changeSize(-1)">-</button>
+    Size: {{ getSize() }}
+    <button mat-flat-button color="primary" (click)="changeSize(1)">+</button>
+</div>
