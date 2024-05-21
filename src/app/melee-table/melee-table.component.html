@@ -28,6 +28,16 @@
 <mat-slide-toggle (change)="toggleSecondAttack($event)">Second Attack</mat-slide-toggle>
 <mat-slide-toggle (change)="toggleLeadBlades($event)">Lead Blades</mat-slide-toggle>
 <mat-slide-toggle (change)="toggleElementalBody($event)">Corpo Elementale III</mat-slide-toggle>
+<mat-slide-toggle (change)="toggleHaste($event)">Velocità</mat-slide-toggle>
+
+<div class="row">
+    <label id="attack-iteration">Current Attack</label>
+    <mat-radio-group [(ngModel)]="currentAttackIteration">
+        @for (attackNumber of attackIterations; track attackNumber) {
+            <mat-radio-button class="example-radio-button" [value]="attackNumber">{{attackNumber.AttackNumber}}</mat-radio-button>
+        }
+    </mat-radio-group>
+</div>
 <div class="row">
     <button mat-flat-button color="warn" (click)="changeSize(-1)">-</button>
     Size: {{ getSize() }}

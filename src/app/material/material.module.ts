@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -9,12 +10,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   imports: [
     MatTableModule,
     MatButtonModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatRadioModule
   ],
   exports: [
     MatTableModule,
     MatButtonModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatRadioModule
   ]
 })
 export class MaterialModule { }

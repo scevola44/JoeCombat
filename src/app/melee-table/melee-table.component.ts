@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { MaterialModule } from '../material/material.module';
 import { DamageDiceUtils } from '../utils/damage-dice.utils';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-melee-table',
   standalone: true,
   imports: [
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ],
   templateUrl: './melee-table.component.html',
   styleUrl: './melee-table.component.css'
@@ -14,7 +16,7 @@ import { DamageDiceUtils } from '../utils/damage-dice.utils';
 export class MeleeTableComponent {
   displayedColumns: string[] = ["Arma", "Attacco", "Danni", "Bonus"];
 
-  dataSource: WeaponAttack[] = [{
+  dataSource: WeaponListing[] = [{
     "Name": "mazza",
     "AttackBonus": 8,
     "Damage": "1d10",
@@ -32,14 +34,32 @@ export class MeleeTableComponent {
   strengthMod: number = +4;
   currentSize: number = 1;
   powerAttack: boolean = false;
-  secondAttack: boolean = false;
+  isHasted: boolean = false;
+  currentAttackIteration: Attack = {
+    "AttackNumber":1,
+    "AttackPenalty": 0
+  };
+  attackIterations: Attack[] = [{
+    "AttackNumber":1,
+    "AttackPenalty": 0
+   },
+   {
+    "AttackNumber": 2,
+    "AttackPenalty": -5
+  }];
 
   calcDamageBonus(bonus: number, multiplier: number){
     return Math.floor(this.strengthMod*multiplier + bonus);
   }
 
+  secondAttack(){
+    return this.currentAttackIteration.AttackNumber != 1;
+  }
+
   calcAttackBonus(bonus: number){
-    return bonus + this.strengthMod;
+    let powerAttackMalus = this.secondAttack() && this.powerAttack ? -4 : 0;
+
+    return bonus + this.strengthMod + this.currentAttackIteration.AttackPenalty + powerAttackMalus;
   }
 
   getSize(): string {
@@ -89,24 +109,38 @@ export class MeleeTableComponent {
 
   toggleSecondAttack(event: any){
     this.secondAttack = event.checked;
-    let attackBonus = -5;
-
-    if (this.powerAttack) attackBonus =- 4;
-
-    this.toggleBonus(event, attackBonus, 0)
   }
 
   togglePowerAttack(event: any){
     this.powerAttack = event.checked;
-    let attackBonus = 0;
 
-    if (this.secondAttack) attackBonus = -4;
+    this.toggleBonus(event, 0, 6);
+  }
 
-    this.toggleBonus(event, attackBonus, 6);
+  toggleHaste(event: any){
+    this.isHasted = event.checked;
+
+    if (this.isHasted){
+      this.attackIterations.push({
+        "AttackNumber": 3,
+        "AttackPenalty": 0
+      })
+
+    }
+    else {
+      this.attackIterations.pop();
+    }
+
+    this.toggleBonus(event, 1, 0)
   }
 }
 
-export interface WeaponAttack{
+export interface Attack{
+  AttackNumber: number;
+  AttackPenalty: number;
+}
+
+export interface WeaponListing{
   Name: string,
   AttackBonus: number,
   Damage: string,
