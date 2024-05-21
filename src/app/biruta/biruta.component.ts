@@ -6,16 +6,16 @@ import { WeaponListing } from '../entities/WeaponListing';
 import { Attack } from '../entities/Attack';
 
 @Component({
-  selector: 'app-melee-table',
+  selector: 'app-biruta',
   standalone: true,
   imports: [
     MaterialModule,
     FormsModule
   ],
-  templateUrl: './melee-table.component.html',
-  styleUrl: './melee-table.component.css'
+  templateUrl: './biruta.component.html',
+  styleUrl: './biruta.component.css'
 })
-export class MeleeTableComponent {
+export class BirutaComponent {
   displayedColumns: string[] = ["Arma", "Attacco", "Danni", "Bonus"];
 
   dataSource: WeaponListing[] = [{

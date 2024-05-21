@@ -33,7 +33,7 @@ export abstract class DamageDiceUtils {
         "16d6",
     ]
 
-    public static increaseDamageDice(currentDie: string, sizeChange: number): string{
+    public static getIncreasedDamageDice(currentDie: string, sizeChange: number): string{
         let currentDieIndex = this.damageDiceTable.indexOf(currentDie);
         let newIndex: number = currentDieIndex + sizeChange*2;
 
