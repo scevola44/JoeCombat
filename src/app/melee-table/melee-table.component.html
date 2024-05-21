@@ -22,7 +22,6 @@
 </table>
 
 <mat-slide-toggle (change)="toggleBonus($event, 1, 1)">Inspire Courage</mat-slide-toggle>
-<mat-slide-toggle (change)="toggleBonus($event, 4, 0)">Z Flanking</mat-slide-toggle>
 <mat-slide-toggle (change)="toggleStrengthBonus($event, 2)">Focus Animale</mat-slide-toggle>
 <mat-slide-toggle (change)="togglePowerAttack($event)">Power Attack</mat-slide-toggle>
 <mat-slide-toggle (change)="toggleLeadBlades($event)">Lead Blades</mat-slide-toggle>
@@ -30,13 +29,23 @@
 <mat-slide-toggle (change)="toggleHaste($event)">Velocità</mat-slide-toggle>
 
 <div class="row">
-    <label id="attack-iteration">Current Attack</label>
-    <mat-radio-group [(ngModel)]="currentAttackIteration">
-        @for (attackNumber of attackIterations; track attackNumber) {
-            <mat-radio-button class="example-radio-button" [value]="attackNumber">{{attackNumber.AttackNumber}}</mat-radio-button>
+    <label id="flanking">Fiancheggiamento</label>
+    <mat-radio-group [(ngModel)]="currentFlankingBonus">
+        @for (flankingOption of flankingOptions; track flankingOptions) {
+            <mat-radio-button class="example-radio-button" [value]="flankingOption.bonus">{{flankingOption.label}}</mat-radio-button>
         }
     </mat-radio-group>
 </div>
+
+<div class="row">
+    <label id="flanking">Attacco</label>
+    <mat-radio-group [(ngModel)]="currentAttackIteration">
+        @for (attack of attackIterations; track attack) {
+            <mat-radio-button class="example-radio-button" [value]="attack">{{attack.AttackNumber}}</mat-radio-button>
+        }
+    </mat-radio-group>
+</div>
+
 <div class="row">
     <button mat-flat-button color="warn" (click)="changeSize(-1)">-</button>
     Size: {{ getSize() }}

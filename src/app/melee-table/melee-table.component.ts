@@ -17,7 +17,7 @@ export class MeleeTableComponent {
   displayedColumns: string[] = ["Arma", "Attacco", "Danni", "Bonus"];
 
   dataSource: WeaponListing[] = [{
-    "Name": "mazza",
+    "Name": "Glaive Guisarme",
     "AttackBonus": 8,
     "Damage": "1d10",
     "DamageBonus": 1,
@@ -33,8 +33,11 @@ export class MeleeTableComponent {
 
   strengthMod: number = +4;
   currentSize: number = 1;
+  currentFlankingBonus: number = 0;
+
   powerAttack: boolean = false;
   isHasted: boolean = false;
+
   currentAttackIteration: Attack = {
     "AttackNumber":1,
     "AttackPenalty": 0
@@ -48,6 +51,25 @@ export class MeleeTableComponent {
     "AttackPenalty": -5
   }];
 
+  flankingOptions: any[] = [
+    {
+      "label": "N/A",
+      "bonus": 0
+    },
+    {
+      "label": "+2",
+      "bonus": 2
+    },
+    {
+      "label": "+4",
+      "bonus": 4
+    },
+    {
+      "label": "+6",
+      "bonus": 6
+    }
+  ]
+
   calcDamageBonus(bonus: number, multiplier: number){
     return Math.floor(this.strengthMod*multiplier + bonus);
   }
@@ -59,7 +81,7 @@ export class MeleeTableComponent {
   calcAttackBonus(bonus: number){
     let powerAttackMalus = this.secondAttack() && this.powerAttack ? -4 : 0;
 
-    return bonus + this.strengthMod + this.currentAttackIteration.AttackPenalty + powerAttackMalus;
+    return bonus + this.strengthMod + this.currentAttackIteration.AttackPenalty + this.currentFlankingBonus + powerAttackMalus;
   }
 
   getSize(): string {
