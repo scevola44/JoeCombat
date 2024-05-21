@@ -34,6 +34,7 @@ export abstract class DamageDiceUtils {
     ]
 
     public static getIncreasedDamageDice(currentDie: string, sizeChange: number): string{
+        currentDie = currentDie.replace("1d12", "2d6");
         let currentDieIndex = this.damageDiceTable.indexOf(currentDie);
         let newIndex: number = currentDieIndex + sizeChange*2;
 
