@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { WeaponListing } from '../entities/WeaponListing';
 import { Attack } from '../entities/Attack';
 import { ArmorClassSharedComponent } from '../shared/armor-class-shared/armor-class-shared.component';
+import { MeleeAttacksSharedComponent } from '../shared/melee-attacks-shared/melee-attacks-shared.component';
 
 @Component({
   selector: 'app-biruta',
@@ -12,7 +13,8 @@ import { ArmorClassSharedComponent } from '../shared/armor-class-shared/armor-cl
   imports: [
     MaterialModule,
     FormsModule,
-    ArmorClassSharedComponent
+    ArmorClassSharedComponent,
+    MeleeAttacksSharedComponent
   ],
   templateUrl: './biruta.component.html',
   styleUrl: './biruta.component.css'
@@ -20,6 +22,7 @@ import { ArmorClassSharedComponent } from '../shared/armor-class-shared/armor-cl
 export class BirutaComponent {
 
   @ViewChild(ArmorClassSharedComponent) armorClassComponent!: ArmorClassSharedComponent;
+  @ViewChild(MeleeAttacksSharedComponent) attacksComponent!: MeleeAttacksSharedComponent;
 
   displayedColumns: string[] = ["Arma", "Attacco", "Danni", "Bonus"];
 
@@ -135,42 +138,10 @@ export class BirutaComponent {
     this.changeSize(modifier);
   }
 
-  toggleBonus(event: any, attack: number, damage: number){
-    if (!event.checked) {
-      attack = attack * -1;
-      damage = damage * -1;
-    }
-    this.dataSource.forEach(a => {a.AttackBonus += attack; a.DamageBonus += damage});
-  }
-
   toggleStrengthBonus(event: any, strengthChange: number){
     let strengthBon = event.checked ? strengthChange : -strengthChange;
 
     this.strengthMod += strengthBon;
-  }
-
-  togglePowerAttack(event: any){
-    this.powerAttack = event.checked;
-
-    this.toggleBonus(event, 0, 6);
-  }
-
-  toggleHaste(event: any){
-    this.isHasted = event.checked;
-
-    if (this.isHasted){
-      let lastAttack: Attack = {
-        "AttackNumber": this.attackIterations[this.attackIterations.length-1].AttackNumber +1,
-        "AttackPenalty": this.attackIterations[0].AttackPenalty
-      }
-
-      this.attackIterations.push(lastAttack);
-    }
-    else {
-      this.attackIterations.pop();
-    }
-
-    this.toggleBonus(event, 1, 0)
   }
 }
 
