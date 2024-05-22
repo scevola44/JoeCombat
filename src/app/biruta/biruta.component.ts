@@ -34,11 +34,16 @@ export class BirutaComponent {
   }];
 
   strengthMod: number = +4;
+  dexMod: number = +2;
+  armorBonus: number = 2;
+  shieldBonus: number = 0;
   currentSize: number = 1;
+
   currentFlankingBonus: number = 0;
 
   powerAttack: boolean = false;
   isHasted: boolean = false;
+  isAgainstTouch: boolean = false;
 
   currentAttackIteration: Attack = {
     "AttackNumber":1,
@@ -72,6 +77,15 @@ export class BirutaComponent {
     }
   ]
 
+  getArmorClass(){
+    let armorClass = 10
+    + (1 - this.currentSize)
+    + this.dexMod + (this.isAgainstTouch ? 0 : this.armorBonus + this.shieldBonus)
+    + (this.isHasted ? 1 : 0);
+
+    return armorClass;
+  }
+
   calcDamageBonus(bonus: number, multiplier: number){
     let powerAttackBonus = this.powerAttack  ? 4 * multiplier : 0;
     return Math.floor(this.strengthMod*multiplier + bonus + powerAttackBonus);
@@ -94,6 +108,7 @@ export class BirutaComponent {
   changeSize(modifier: number){
     this.currentSize += modifier;
     this.strengthMod += modifier;
+    this.dexMod -= modifier;
 
     this.increaseDamageDice(modifier);
     this.dataSource.forEach(a => {a.AttackBonus += -modifier});
@@ -113,9 +128,11 @@ export class BirutaComponent {
 
   toggleElementalBody(event: any){
     let modifier = event.checked ? 1 : -1;
-    this.changeSize(modifier);
 
     this.strengthMod += modifier*3;
+    this.dexMod -= modifier;
+    this.armorBonus += modifier*6;
+
     this.toggleBonus(event, modifier, 0);
   }
 
