@@ -4,6 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { DamageDiceUtils } from '../utils/damage-dice.utils';
 import { ArmorClassSharedComponent } from '../shared/armor-class-shared/armor-class-shared.component';
+import { MeleeAttacksSharedComponent } from '../shared/melee-attacks-shared/melee-attacks-shared.component';
+
+const INITIAL_MELEE_LISTING: WeaponListing[] = [{
+  "Name": "Pugno d'Acciaio",
+  "AttackBonus": 8,
+  "DamageDice": "1d6",
+  "DamageBonus": 0,
+  "DmgMult": 1
+}];
 
 @Component({
   selector: 'app-kether',
@@ -11,7 +20,8 @@ import { ArmorClassSharedComponent } from '../shared/armor-class-shared/armor-cl
   imports: [
     MaterialModule,
     FormsModule,
-    ArmorClassSharedComponent
+    ArmorClassSharedComponent,
+    MeleeAttacksSharedComponent
   ],
   templateUrl: './kether.component.html',
   styleUrl: './kether.component.css'
@@ -29,6 +39,8 @@ export class KetherComponent {
   shieldBonus: number = 0;
   untypedAcBonus: number = 0;
   dodgeBonus: number = 1;
+  flankingBonus: number = 0;
+  strengthMod: number = 2;
 
   dataSource: WeaponListing[] = [{
     "Name": "Fucile",
@@ -44,6 +56,8 @@ export class KetherComponent {
     "DamageBonus": 5,
     "DmgMult": 1
   }];
+
+  meleeAttacks: WeaponListing[] = INITIAL_MELEE_LISTING;
 
   displayedColumns: string[] = ["Arma", "Attacco", "Danni", "Bonus"];
 
