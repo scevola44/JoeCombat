@@ -40,3 +40,17 @@
     Incrementi di Gittata: {{ rangeIncrements }}
     <button mat-flat-button color="primary" (click)="changeRangeIncrements(1)">+</button>
 </div>
+
+<!-- DEFENSE -->
+<app-armor-class-shared
+    [armorBonus]="armorBonus"
+    [currentSize]="currentSize"
+    [dexMod]="dexMod"
+    [isAgainstTouch]="isAgainstTouch"
+    [shieldBonus]="shieldBonus"
+    [untypedAcBonus]="untypedAcBonus"
+    [isHasted]="isHasted"
+    [dodgeBonus]="dodgeBonus"
+>
+</app-armor-class-shared>
+<!-- *** -->

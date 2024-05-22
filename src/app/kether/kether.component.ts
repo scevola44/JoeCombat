@@ -3,13 +3,15 @@ import { WeaponListing } from '../entities/WeaponListing';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { DamageDiceUtils } from '../utils/damage-dice.utils';
+import { ArmorClassSharedComponent } from '../shared/armor-class-shared/armor-class-shared.component';
 
 @Component({
   selector: 'app-kether',
   standalone: true,
   imports: [
     MaterialModule,
-    FormsModule
+    FormsModule,
+    ArmorClassSharedComponent
   ],
   templateUrl: './kether.component.html',
   styleUrl: './kether.component.css'
@@ -21,6 +23,12 @@ export class KetherComponent {
   dexMod: number = 5;
   rangeIncrements: number = 0;
   currentSize: number = 1;
+
+  armorBonus: number = 3;
+  isAgainstTouch: boolean = false;
+  shieldBonus: number = 0;
+  untypedAcBonus: number = 0;
+  dodgeBonus: number = 1;
 
   dataSource: WeaponListing[] = [{
     "Name": "Fucile",
