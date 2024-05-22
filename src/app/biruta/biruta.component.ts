@@ -34,10 +34,11 @@ export class BirutaComponent {
   }];
 
   strengthMod: number = +4;
-  dexMod: number = +2;
-  armorBonus: number = 2;
+  dexMod: number = +1;
+  armorBonus: number = 6;
   shieldBonus: number = 0;
   currentSize: number = 1;
+  untypedAcBonus: number = 0;
 
   currentFlankingBonus: number = 0;
 
@@ -81,7 +82,8 @@ export class BirutaComponent {
     let armorClass = 10
     + (1 - this.currentSize)
     + this.dexMod + (this.isAgainstTouch ? 0 : this.armorBonus + this.shieldBonus)
-    + (this.isHasted ? 1 : 0);
+    + (this.isHasted ? 1 : 0)
+    + this.untypedAcBonus;
 
     return armorClass;
   }
@@ -133,7 +135,7 @@ export class BirutaComponent {
     this.dexMod -= modifier;
     this.armorBonus += modifier*6;
 
-    this.toggleBonus(event, modifier, 0);
+    this.changeSize(modifier);
   }
 
   toggleBonus(event: any, attack: number, damage: number){
