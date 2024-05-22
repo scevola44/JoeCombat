@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { BirutaComponent } from './biruta';
-import { KetherComponent, KetherMeleeComponent } from './kether';
+import { KetherComponent } from './kether';
+import { KetherMeleeComponent } from './kether/kether-melee.component';
  
 export const routes: Routes = [
     { path: 'sheets/kether/ranged', component: KetherComponent },

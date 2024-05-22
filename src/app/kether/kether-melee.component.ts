@@ -71,7 +71,7 @@ export class KetherMeleeComponent {
 
   calcDamageBonus(bonus: number, multiplier: number){
     return Math.floor(this.strengthMod*multiplier + bonus);
-  }
+   }
 
   getSize(): string {
     return DamageDiceUtils.sizeList[this.currentSize];
@@ -125,36 +125,23 @@ export class KetherMeleeComponent {
 
   toggleElementalBody(event: any){
     let modifier = event.checked ? 1 : -1;
+
     this.changeSize(modifier);
-    this.toggleBonus(event, modifier, 0);
   }
 
   toggleFireHands(event: any) {
     this.fireHandsOut = event.checked;
     let newData = this.dataSource.data;
 
-    if(this.fireHandsOut) newData.push(this.fireHandsWeaponListing);
-    if(!this.fireHandsOut) newData.pop();
+    if(this.fireHandsOut) {
+      this.strengthMod += 5;
+      newData.push(this.fireHandsWeaponListing);
+    }
+    if(!this.fireHandsOut) {
+      this.strengthMod -= 5;
+      newData.pop();
+    }
 
     this.dataSource.data = newData;
-  }
-}
-
-class WeaponListingDataSource extends DataSource<WeaponListing> {
-  private _dataStream = new ReplaySubject<WeaponListing[]>();
-
-  constructor(initialData: WeaponListing[]) {
-    super();
-    this.setData(initialData);
-  }
-
-  connect(): Observable<WeaponListing[]> {
-    return this._dataStream;
-  }
-
-  disconnect() {}
-
-  setData(data: WeaponListing[]) {
-    this._dataStream.next(data);
   }
 }

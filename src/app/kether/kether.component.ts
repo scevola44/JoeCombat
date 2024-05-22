@@ -25,8 +25,15 @@ export class KetherComponent {
   dataSource: WeaponListing[] = [{
     "Name": "Fucile",
     "AttackBonus": 9,
-    "DamageDice": "1d12",
+    "DamageDice": "2d12",
     "DamageBonus": 2,
+    "DmgMult": 1
+  },
+  {
+    "Name": "Ondata di Fuoco",
+    "AttackBonus": 7,
+    "DamageDice": "6d6",
+    "DamageBonus": 5,
     "DmgMult": 1
   }];
 
@@ -74,7 +81,7 @@ export class KetherComponent {
   increaseDamageDice(modifier: number){
     this.dataSource.forEach(attack => {
       let newDice = DamageDiceUtils.getIncreasedDamageDice(attack.DamageDice, modifier);
-      attack.DamageDice = newDice == "2d6" ? "1d12" : newDice;
+      attack.DamageDice = newDice == "4d6" ? "2d12" : newDice;
     });
   }
 
@@ -89,7 +96,7 @@ export class KetherComponent {
     this.changeSize(modifier);
 
     this.dexMod += modifier*2;
-    this.toggleBonus(event, modifier, 0);
+    this.toggleBonus(event, 1, 0);
   }
 
   toggleHaste(event: any){
