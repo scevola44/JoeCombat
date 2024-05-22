@@ -1,0 +1,35 @@
+@use '@angular/material' as mat;
+
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@include mat.core();
+
+$my-primary: mat.define-palette(mat.$cyan-palette, 400, 200, 900);
+$my-accent: mat.define-palette(mat.$cyan-palette, A700, A100, A700);
+$my-warn: mat.define-palette(mat.$red-palette);
+
+$biruta: mat.define-palette(mat.$brown-palette, 700, 200, 900);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+$light-theme: mat.define-light-theme(
+    (
+        color: (
+            primary: $my-primary,
+            accent: $my-accent,
+            warn: $my-warn
+        )
+    )
+);
+
+.mat-biruta {
+    color: rgb(255, 255, 254) !important;
+    background-color: #7c5605 !important;
+}
+
+.mat-kether{
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(188, 46, 39) !important;
+}
+
+@include mat.all-component-themes($light-theme);
