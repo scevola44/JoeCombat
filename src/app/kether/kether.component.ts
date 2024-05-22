@@ -23,16 +23,16 @@ export class KetherComponent {
 
   dataSource: WeaponListing[] = [{
     "Name": "Fucile",
-    "AttackBonus": 8,
+    "AttackBonus": 9,
     "DamageDice": "1d12",
-    "DamageBonus": 1,
+    "DamageBonus": 2,
     "DmgMult": 1
   }];
 
   displayedColumns: string[] = ["Arma", "Attacco", "Danni", "Bonus"];
 
   calcAttackBonus(bonus: number){
-    let deadlyAimMalus = this.deadlyAimActive ? -3 : 0;
+    let deadlyAimMalus = this.deadlyAimActive ? -2 : 0;
     let preciseShotBonus = this.withinNineMeters ? +1 : 0;
     let rangePenalty = -this.rangeIncrements;
 
@@ -40,7 +40,7 @@ export class KetherComponent {
   }
 
   calcDamageBonus(bonus: number){
-    let deadlyAimBonus = this.deadlyAimActive ? 6 : 0;
+    let deadlyAimBonus = this.deadlyAimActive ? 4 : 0;
     let preciseShotBonus = this.withinNineMeters ? +1 : 0;
 
     return bonus + this.dexMod + deadlyAimBonus + preciseShotBonus;
@@ -72,7 +72,7 @@ export class KetherComponent {
     });
   }
 
-  adjustDiceForLethal(damageDice: string): string{
+  adjustDiceForVitalStrike(damageDice: string): string{
     let x = damageDice.split('d');
     let numberOfDice: number = +x[0];
     return numberOfDice*2 + "d" + x[1];

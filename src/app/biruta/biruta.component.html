@@ -6,7 +6,7 @@
     </ng-container>
     <ng-container matColumnDef="Attacco">
         <th mat-header-cell *matHeaderCellDef> Attacco </th>
-        <td mat-cell *matCellDef="let attack"> {{calcAttackBonus(attack.AttackBonus)}} </td>
+        <td mat-cell *matCellDef="let attack"> {{calcAttackBonus(attack)}} </td>
     </ng-container>
     <ng-container matColumnDef="Danni">
         <th mat-header-cell *matHeaderCellDef> Danni </th>
@@ -23,7 +23,7 @@
 
 <mat-slide-toggle (change)="toggleBonus($event, 1, 1)">Inspire Courage</mat-slide-toggle>
 <mat-slide-toggle (change)="toggleStrengthBonus($event, 2)">Focus Animale</mat-slide-toggle>
-<mat-slide-toggle (change)="togglePowerAttack($event)">Power Attack</mat-slide-toggle>
+<mat-slide-toggle (change)="powerAttack = !powerAttack">Power Attack</mat-slide-toggle>
 <mat-slide-toggle (change)="toggleLeadBlades($event)">Lead Blades</mat-slide-toggle>
 <mat-slide-toggle (change)="toggleElementalBody($event)">Corpo Elementale III</mat-slide-toggle>
 <mat-slide-toggle (change)="toggleHaste($event)">Velocità</mat-slide-toggle>

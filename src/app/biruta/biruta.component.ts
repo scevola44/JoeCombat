@@ -26,9 +26,9 @@ export class BirutaComponent {
     "DmgMult": 1.5
   },
   {
-    "Name": "altra arma",
-    "AttackBonus": 5,
-    "DamageDice": "1d6",
+    "Name": "Mazza",
+    "AttackBonus": 8,
+    "DamageDice": "1d8",
     "DamageBonus": 1,
     "DmgMult": 1
   }];
@@ -73,17 +73,18 @@ export class BirutaComponent {
   ]
 
   calcDamageBonus(bonus: number, multiplier: number){
-    return Math.floor(this.strengthMod*multiplier + bonus);
+    let powerAttackBonus = this.powerAttack  ? 4 * multiplier : 0;
+    return Math.floor(this.strengthMod*multiplier + bonus + powerAttackBonus);
   }
 
   secondAttack(){
     return this.currentAttackIteration.AttackNumber != 1;
   }
 
-  calcAttackBonus(bonus: number){
-    let powerAttackMalus = this.secondAttack() && this.powerAttack ? -4 : 0;
+  calcAttackBonus(weaponAttack: WeaponListing){
+    let powerAttackMalus = ((this.secondAttack() || weaponAttack.DmgMult == 1) && this.powerAttack) ? -2 : 0;
 
-    return bonus + this.strengthMod + this.currentAttackIteration.AttackPenalty + this.currentFlankingBonus + powerAttackMalus;
+    return weaponAttack.AttackBonus + this.strengthMod + this.currentAttackIteration.AttackPenalty + this.currentFlankingBonus + powerAttackMalus;
   }
 
   getSize(): string {
@@ -114,7 +115,8 @@ export class BirutaComponent {
     let modifier = event.checked ? 1 : -1;
     this.changeSize(modifier);
 
-    this.strengthMod += modifier*2;
+    this.strengthMod += modifier*3;
+    this.toggleBonus(event, modifier, 0);
   }
 
   toggleBonus(event: any, attack: number, damage: number){
