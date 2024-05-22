@@ -1,21 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MaterialModule } from '../material/material.module';
 import { DamageDiceUtils } from '../utils/damage-dice.utils';
 import { FormsModule } from '@angular/forms';
 import { WeaponListing } from '../entities/WeaponListing';
 import { Attack } from '../entities/Attack';
+import { ArmorClassSharedComponent } from '../shared/armor-class-shared/armor-class-shared.component';
 
 @Component({
   selector: 'app-biruta',
   standalone: true,
   imports: [
     MaterialModule,
-    FormsModule
+    FormsModule,
+    ArmorClassSharedComponent
   ],
   templateUrl: './biruta.component.html',
   styleUrl: './biruta.component.css'
 })
 export class BirutaComponent {
+
+  @ViewChild(ArmorClassSharedComponent) armorClassComponent!: ArmorClassSharedComponent;
+
   displayedColumns: string[] = ["Arma", "Attacco", "Danni", "Bonus"];
 
   dataSource: WeaponListing[] = [{
@@ -78,27 +83,19 @@ export class BirutaComponent {
     }
   ]
 
-  getArmorClass(){
-    let armorClass = 10
-    + (1 - this.currentSize)
-    + this.dexMod + (this.isAgainstTouch ? 0 : this.armorBonus + this.shieldBonus)
-    + (this.isHasted ? 1 : 0)
-    + this.untypedAcBonus;
-
-    return armorClass;
-  }
+  
 
   calcDamageBonus(bonus: number, multiplier: number){
     let powerAttackBonus = this.powerAttack  ? 4 * multiplier : 0;
     return Math.floor(this.strengthMod*multiplier + bonus + powerAttackBonus);
   }
 
-  secondAttack(){
+  isSecondAttack(){
     return this.currentAttackIteration.AttackNumber != 1;
   }
 
   calcAttackBonus(weaponAttack: WeaponListing){
-    let powerAttackPenalty = ((this.secondAttack() || weaponAttack.DmgMult == 1) && this.powerAttack) ? -2 : 0;
+    let powerAttackPenalty = ((this.isSecondAttack() || weaponAttack.DmgMult == 1) && this.powerAttack) ? -2 : 0;
 
     return weaponAttack.AttackBonus + this.strengthMod + this.currentAttackIteration.AttackPenalty + this.currentFlankingBonus + powerAttackPenalty;
   }

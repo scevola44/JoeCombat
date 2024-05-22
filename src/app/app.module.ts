@@ -5,6 +5,7 @@ import { KetherComponent } from './kether';
 import { BirutaComponent } from './biruta';
 import { HomeComponent } from './home';
 import { BrowserModule } from '@angular/platform-browser';
+import { ArmorClassSharedComponent } from './shared/armor-class-shared/armor-class-shared.component';
 
 @NgModule ({
   declarations: [
@@ -12,6 +13,7 @@ import { BrowserModule } from '@angular/platform-browser';
     HomeComponent,
     BirutaComponent,
     KetherComponent,
+    ArmorClassSharedComponent
   ],
   imports: [
     BrowserModule,

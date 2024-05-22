@@ -1,0 +1,12 @@
+<div class="row" style="padding: 10px;">
+    <h4 style="display: inline;">CA</h4> {{ getArmorClass() }}
+</div>
+<br/>
+
+<div style="padding: 10px;">
+    <mat-slide-toggle [(ngModel)]="isAgainstTouch">Contatto</mat-slide-toggle>
+    <mat-slide-toggle (change)="$event.checked ? shieldBonus = shieldBonus + 1 : shieldBonus = shieldBonus - 1">Scudo di Pietra</mat-slide-toggle>
+    <mat-slide-toggle (change)="$event.checked ? dexMod = dexMod + 2 : dexMod = dexMod - 2">F. Animale Dex</mat-slide-toggle>
+    <mat-slide-toggle (change)="$event.checked ? untypedAcBonus = untypedAcBonus + 1 : untypedAcBonus = untypedAcBonus - 1">Fortuna Protettiva</mat-slide-toggle>
+    <mat-slide-toggle (change)="$event.checked ? armorBonus = armorBonus + 5 : armorBonus = armorBonus - 5">Ironskin</mat-slide-toggle>
+</div>
