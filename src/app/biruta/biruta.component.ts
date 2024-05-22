@@ -82,9 +82,9 @@ export class BirutaComponent {
   }
 
   calcAttackBonus(weaponAttack: WeaponListing){
-    let powerAttackMalus = ((this.secondAttack() || weaponAttack.DmgMult == 1) && this.powerAttack) ? -2 : 0;
+    let powerAttackPenalty = ((this.secondAttack() || weaponAttack.DmgMult == 1) && this.powerAttack) ? -2 : 0;
 
-    return weaponAttack.AttackBonus + this.strengthMod + this.currentAttackIteration.AttackPenalty + this.currentFlankingBonus + powerAttackMalus;
+    return weaponAttack.AttackBonus + this.strengthMod + this.currentAttackIteration.AttackPenalty + this.currentFlankingBonus + powerAttackPenalty;
   }
 
   getSize(): string {

@@ -1,4 +1,5 @@
 <h1>Biruta</h1>
+
 <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="Arma">
         <th mat-header-cell *matHeaderCellDef> Arma </th>
@@ -23,7 +24,7 @@
 
 <mat-slide-toggle (change)="toggleBonus($event, 1, 1)">Inspire Courage</mat-slide-toggle>
 <mat-slide-toggle (change)="toggleStrengthBonus($event, 2)">Focus Animale</mat-slide-toggle>
-<mat-slide-toggle (change)="powerAttack = !powerAttack">Power Attack</mat-slide-toggle>
+<mat-slide-toggle [(ngModel)]="powerAttack">Power Attack</mat-slide-toggle>
 <mat-slide-toggle (change)="toggleLeadBlades($event)">Lead Blades</mat-slide-toggle>
 <mat-slide-toggle (change)="toggleElementalBody($event)">Corpo Elementale III</mat-slide-toggle>
 <mat-slide-toggle (change)="toggleHaste($event)">Velocità</mat-slide-toggle>
