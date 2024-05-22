@@ -6,6 +6,7 @@ import { WeaponListing } from '../entities/WeaponListing';
 import { Attack } from '../entities/Attack';
 import { ArmorClassSharedComponent } from '../shared/armor-class-shared/armor-class-shared.component';
 import { MeleeAttacksSharedComponent } from '../shared/melee-attacks-shared/melee-attacks-shared.component';
+import { SizeChangeSharedComponent } from '../shared/size-change-shared/size-change-shared.component';
 
 @Component({
   selector: 'app-biruta',
@@ -14,7 +15,8 @@ import { MeleeAttacksSharedComponent } from '../shared/melee-attacks-shared/mele
     MaterialModule,
     FormsModule,
     ArmorClassSharedComponent,
-    MeleeAttacksSharedComponent
+    MeleeAttacksSharedComponent,
+    SizeChangeSharedComponent
   ],
   templateUrl: './biruta.component.html',
   styleUrl: './biruta.component.css'

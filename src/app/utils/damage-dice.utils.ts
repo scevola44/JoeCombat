@@ -40,6 +40,8 @@ export abstract class DamageDiceUtils {
 
             currentDie = numberOfDice*2 + "d6";
         }
+
+        if (currentDie == "2d10") return "4d8";
         
         let currentDieIndex = this.damageDiceTable.indexOf(currentDie);
         let newIndex: number = currentDieIndex + sizeChange*2;

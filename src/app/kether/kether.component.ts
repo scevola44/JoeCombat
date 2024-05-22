@@ -103,7 +103,8 @@ export class KetherComponent {
   increaseDamageDice(modifier: number){
     this.dataSource.forEach(attack => {
       let newDice = DamageDiceUtils.getIncreasedDamageDice(attack.DamageDice, modifier);
-      attack.DamageDice = newDice == "4d6" ? "2d12" : newDice;
+      if (newDice == "4d6") newDice = "2d12";
+      if (newDice == "3d8") newDice = "2d10";
     });
   }
 
@@ -126,4 +127,20 @@ export class KetherComponent {
 
     this.toggleBonus(event, 1, 0)
   }
+
+  /*toggleFireHands(event: any) {
+    this.fireHandsOut = event.checked;
+    let newData = this.dataSource.data;
+
+    if(this.fireHandsOut) {
+      this.strengthMod += 5;
+      newData.push(this.fireHandsWeaponListing);
+    }
+    if(!this.fireHandsOut) {
+      this.strengthMod -= 5;
+      newData.pop();
+    }
+
+    this.dataSource.data = newData;
+  }*/
 }

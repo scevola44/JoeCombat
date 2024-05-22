@@ -48,8 +48,11 @@
 </div>
 <!-- *** -->
 
-<div class="row" style="padding: 10px;">
-    <button mat-flat-button color="warn" (click)="changeSize(-1)">-</button>
-    Size: {{ getSize() }}
-    <button mat-flat-button color="primary" (click)="changeSize(1)">+</button>
-</div>
+<app-size-change-shared
+    [meleeAttacks]="dataSource"
+    [rangedAttacks]="[]"
+    [currentSize]="currentSize"
+    [strengthMod]="strengthMod"
+    [dexMod]="dexMod"
+>
+</app-size-change-shared>
