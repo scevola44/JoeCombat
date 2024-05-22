@@ -22,8 +22,10 @@
 </table>
 
 <mat-slide-toggle (change)="toggleBonus($event, 1, 1)">Inspire Courage</mat-slide-toggle>
-<mat-slide-toggle (change)="withinNineMeters = !withinNineMeters">Entro 9m</mat-slide-toggle>
-<mat-slide-toggle (change)="deadlyAimActive = !deadlyAimActive">Mira Letale</mat-slide-toggle>
+<mat-slide-toggle  [(ngModel)]="withinNineMeters">Entro 9m</mat-slide-toggle>
+<mat-slide-toggle [(ngModel)]="deadlyAimActive">Mira Letale</mat-slide-toggle>
+<mat-slide-toggle (change)="toggleElementalBody($event)">Corpo Elementale III</mat-slide-toggle>
+<mat-slide-toggle (change)="toggleHaste($event)">Velocità</mat-slide-toggle>
 
 <div class="row">
     <button mat-flat-button color="warn" (click)="changeSize(-1)">-</button>
@@ -32,7 +34,7 @@
 </div>
 
 <div class="row">
-    <button mat-flat-button color="warn" (click)="rangeIncrements = rangeIncrements -1">-</button>
-    Incrementi di Gittata
-    <button mat-flat-button color="primary" (click)="rangeIncrements = rangeIncrements +1">+</button>
+    <button mat-flat-button color="warn" (click)="changeRangeIncrements(-1)">-</button>
+    Incrementi di Gittata: {{ rangeIncrements }}
+    <button mat-flat-button color="primary" (click)="changeRangeIncrements(1)">+</button>
 </div>

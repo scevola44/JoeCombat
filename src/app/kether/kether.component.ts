@@ -16,8 +16,9 @@ import { DamageDiceUtils } from '../utils/damage-dice.utils';
 })
 export class KetherComponent {
   deadlyAimActive: boolean = false;
-  dexMod: number = 5;
   withinNineMeters: boolean = false;
+  isHasted: boolean = false;
+  dexMod: number = 5;
   rangeIncrements: number = 0;
   currentSize: number = 1;
 
@@ -65,6 +66,11 @@ export class KetherComponent {
     this.dataSource.forEach(a => {a.AttackBonus += -modifier});
   }
 
+  changeRangeIncrements(steps: number){
+    this.rangeIncrements += steps;
+    if (this.rangeIncrements > 0) this.withinNineMeters = false;
+  }
+
   increaseDamageDice(modifier: number){
     this.dataSource.forEach(attack => {
       let newDice = DamageDiceUtils.getIncreasedDamageDice(attack.DamageDice, modifier);
@@ -76,5 +82,19 @@ export class KetherComponent {
     let x = damageDice.split('d');
     let numberOfDice: number = +x[0];
     return numberOfDice*2 + "d" + x[1];
+  }
+
+  toggleElementalBody(event: any){
+    let modifier = event.checked ? 1 : -1;
+    this.changeSize(modifier);
+
+    this.dexMod += modifier*2;
+    this.toggleBonus(event, modifier, 0);
+  }
+
+  toggleHaste(event: any){
+    this.isHasted = event.checked;
+
+    this.toggleBonus(event, 1, 0)
   }
 }

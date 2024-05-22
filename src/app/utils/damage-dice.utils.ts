@@ -30,7 +30,7 @@ export abstract class DamageDiceUtils {
         "8d8",
         "12d6",
         "12d8",
-        "16d6",
+        "16d6"
     ]
 
     public static getIncreasedDamageDice(currentDie: string, sizeChange: number): string{
