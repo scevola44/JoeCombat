@@ -36,6 +36,8 @@ export class RangedAttacksSharedComponent implements OnInit{
   currentAttackIteration!: Attack;
   rangeIncrements: number = 0;
 
+  temporaryAttMod: number = 0;
+  temporaryDmgMod: number = 0;
 
   ngOnInit(): void {
     this.currentAttackIteration = this.attackIterations[0];
@@ -51,7 +53,8 @@ export class RangedAttacksSharedComponent implements OnInit{
     + deadlyAimPenalty
     + this.currentAttackIteration.AttackPenalty
     + preciseShotBonus
-    + rangePenalty;
+    + rangePenalty
+    + this.temporaryAttMod;
   }
 
   calcDamageBonus(bonus: number){
@@ -61,7 +64,8 @@ export class RangedAttacksSharedComponent implements OnInit{
     return bonus
     + this.dexMod
     + deadlyAimBonus
-    + preciseShotBonus;
+    + preciseShotBonus
+    + this.temporaryDmgMod;
   }
 
   isSecondAttack(){

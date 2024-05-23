@@ -19,6 +19,7 @@ export class SizeChangeSharedComponent {
   @Input() strengthMod!: number;
   @Input() dexMod!: number;
 
+
   getSize(): string {
     return DamageDiceUtils.sizeList[this.currentSize];
   }

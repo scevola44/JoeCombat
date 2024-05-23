@@ -23,13 +23,16 @@ export class ArmorClassSharedComponent {
   @Input() isHasted!: boolean;
   @Input() dodgeBonus!: number;
 
+  temporaryAcMod: number = 0;
+
   getArmorClass(){
     let armorClass = 10
     + (1 - this.currentSize)
     + this.dexMod + (this.isAgainstTouch ? 0 : this.armorBonus + this.shieldBonus)
     + (this.isHasted ? 1 : 0)
     + this.untypedAcBonus
-    + this.dodgeBonus;
+    + this.dodgeBonus
+    + this.temporaryAcMod;
 
     return armorClass;
   }

@@ -36,7 +36,8 @@ export class MeleeAttacksSharedComponent implements OnInit{
   }];
 
   currentAttackIteration!: Attack;
-
+  temporaryAttMod: number = 0;
+  temporaryDmgMod: number = 0;
 
   ngOnInit(): void {
     this.currentAttackIteration = this.attackIterations[0];
@@ -52,12 +53,16 @@ export class MeleeAttacksSharedComponent implements OnInit{
     + this.currentAttackIteration.AttackPenalty
     + this.currentFlankingBonus
     + powerAttackPenalty
-    + (this.isHasted ? 1 : 0);
+    + (this.isHasted ? 1 : 0)
+    + this.temporaryAttMod;
   }
 
   calcDamageBonus(bonus: number, multiplier: number){
     let powerAttackBonus = this.powerAttack  ? 4 * multiplier : 0;
-    return Math.floor(this.strengthMod*multiplier + bonus + powerAttackBonus);
+    return Math.floor(this.strengthMod*multiplier)
+    + bonus
+    + powerAttackBonus
+    + this.temporaryDmgMod;
   }
 
   isSecondAttack(){

@@ -7,3 +7,11 @@
     <mat-slide-toggle [(ngModel)]="isAgainstTouch">Contatto</mat-slide-toggle>
     <mat-slide-toggle (change)="$event.checked ? untypedAcBonus = untypedAcBonus + 1 : untypedAcBonus = untypedAcBonus - 1">Fortuna Protettiva</mat-slide-toggle>
 </div>
+
+<!-- TEMPORARY - TOREMOVE -->
+<div class="row" style="padding: 10px;">
+    <button mat-flat-button color="warn" (click)="temporaryAcMod = temporaryAcMod - 1">-</button>
+    Aggiustamento CA Manuale: {{ temporaryAcMod }}
+    <button mat-flat-button color="accent" (click)="temporaryAcMod = temporaryAcMod + 1">+</button>
+</div>
+<!-- *** -->
