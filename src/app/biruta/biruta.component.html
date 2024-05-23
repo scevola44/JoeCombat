@@ -1,5 +1,6 @@
 <h1>Biruta</h1>
 
+<!-- MELEE -->
 <app-melee-attacks-shared
     [dataSource]="meleeAttacks"
     [currentFlankingBonus]="currentFlankingBonus"
@@ -25,9 +26,16 @@
             }
         </mat-radio-group>
     </div>
-
-    
 </div>
+<!-- *** -->
+
+<!-- RANGED -->
+<app-ranged-attacks-shared
+    [dataSource]="rangedAttacks"
+    [dexMod]="dexMod"
+    [isHasted]="isHasted"
+/>
+<!-- *** -->
 
 <!-- DEFENSE -->
 <app-armor-class-shared

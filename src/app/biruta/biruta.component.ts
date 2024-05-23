@@ -8,6 +8,7 @@ import { ArmorClassSharedComponent } from '../shared/armor-class-shared/armor-cl
 import { MeleeAttacksSharedComponent } from '../shared/melee-attacks-shared/melee-attacks-shared.component';
 import { SizeChangeSharedComponent } from '../shared/size-change-shared/size-change-shared.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { RangedAttacksSharedComponent } from '../shared/ranged-attacks-shared/ranged-attacks-shared.component';
 
 @Component({
   selector: 'app-biruta',
@@ -17,6 +18,7 @@ import { MatTableDataSource } from '@angular/material/table';
     FormsModule,
     ArmorClassSharedComponent,
     MeleeAttacksSharedComponent,
+    RangedAttacksSharedComponent,
     SizeChangeSharedComponent
   ],
   templateUrl: './biruta.component.html',
