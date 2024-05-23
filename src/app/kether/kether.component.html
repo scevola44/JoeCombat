@@ -9,6 +9,8 @@
 >
 </app-melee-attacks-shared>
 
+<mat-slide-toggle (change)="toggleFireHands($event)">Braccia di Brace</mat-slide-toggle>
+
 <h4>Ranged</h4>
 <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="Arma">
@@ -32,19 +34,20 @@
     <tr mat-row *matRowDef="let attackRow; columns: displayedColumns;"></tr>
 </table>
 
-<mat-slide-toggle (change)="toggleBonus($event, 1, 1)">Inspire Courage</mat-slide-toggle>
 <mat-slide-toggle  [(ngModel)]="withinNineMeters">Entro 9m</mat-slide-toggle>
 <mat-slide-toggle [(ngModel)]="deadlyAimActive">Mira Letale</mat-slide-toggle>
 <mat-slide-toggle (change)="toggleElementalBody($event)">Corpo Elementale III</mat-slide-toggle>
-<mat-slide-toggle (change)="toggleHaste($event)">Velocità</mat-slide-toggle>
 
-<!-- <mat-slide-toggle (change)="toggleFireHands($event)">Braccia di Brace</mat-slide-toggle> -->
-
-<div class="row">
-    <button mat-flat-button color="warn" (click)="changeSize(-1)">-</button>
-    Size: {{ getSize() }}
-    <button mat-flat-button color="primary" (click)="changeSize(1)">+</button>
-</div>
+<!-- SIZE CHANGE -->
+<app-size-change-shared
+    [meleeAttacks]="meleeAttacks"
+    [rangedAttacks]="dataSource"
+    [currentSize]="currentSize"
+    [strengthMod]="strengthMod"
+    [dexMod]="dexMod"
+>
+</app-size-change-shared>
+<!-- *** -->
 
 <div class="row">
     <button mat-flat-button color="warn" (click)="changeRangeIncrements(-1)">-</button>

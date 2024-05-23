@@ -3,6 +3,7 @@ import { WeaponListing } from '../../entities/WeaponListing';
 import { MaterialModule } from '../../material/material.module';
 import { Attack } from '../../entities/Attack';
 import { FormsModule } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-melee-attacks-shared',
@@ -16,10 +17,12 @@ import { FormsModule } from '@angular/forms';
 })
 export class MeleeAttacksSharedComponent implements OnInit{
 
-  @Input() dataSource!: WeaponListing[];
+  @Input() dataSource!: MatTableDataSource<WeaponListing>;
   @Input() strengthMod!: number;
   @Input() currentFlankingBonus!: number;
   @Input() isHasted!: boolean;
+
+  @Input() powerAttack: boolean = false;
 
   displayedColumns: string[] = ["Arma", "Attacco", "Danni", "Bonus"];
 
@@ -34,7 +37,6 @@ export class MeleeAttacksSharedComponent implements OnInit{
 
   currentAttackIteration!: Attack;
 
-  powerAttack: boolean = false;
 
   ngOnInit(): void {
     this.currentAttackIteration = this.attackIterations[0];
@@ -66,7 +68,7 @@ export class MeleeAttacksSharedComponent implements OnInit{
       attack = attack * -1;
       damage = damage * -1;
     }
-    this.dataSource.forEach(a => {a.AttackBonus += attack; a.DamageBonus += damage});
+    this.dataSource.data.forEach(a => {a.AttackBonus += attack; a.DamageBonus += damage});
   }
 
   toggleHaste(event: any){

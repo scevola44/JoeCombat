@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { DamageDiceUtils } from '../../utils/damage-dice.utils';
 import { WeaponListing } from '../../entities/WeaponListing';
 import { MaterialModule } from '../../material/material.module';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-size-change-shared',
@@ -12,7 +13,7 @@ import { MaterialModule } from '../../material/material.module';
 })
 export class SizeChangeSharedComponent {
 
-  @Input() meleeAttacks!: WeaponListing[];
+  @Input() meleeAttacks!: MatTableDataSource<WeaponListing>;
   @Input() rangedAttacks!: WeaponListing[];
   @Input() currentSize!: number;
   @Input() strengthMod!: number;
@@ -28,12 +29,12 @@ export class SizeChangeSharedComponent {
     this.dexMod -= modifier;
 
     this.increaseDamageDice(modifier);
-    this.meleeAttacks.forEach(a => {a.AttackBonus += -modifier});
+    this.meleeAttacks.data.forEach(a => {a.AttackBonus += -modifier});
     this.rangedAttacks.forEach(a => {a.AttackBonus += -modifier});
   }
 
   increaseDamageDice(modifier: number){
-    this.meleeAttacks.forEach(attack => {
+    this.meleeAttacks.data.forEach(attack => {
       attack.DamageDice = DamageDiceUtils.getIncreasedDamageDice(attack.DamageDice, modifier);
     });
 

@@ -1,10 +1,11 @@
 <h1>Biruta</h1>
 
 <app-melee-attacks-shared
-    [dataSource]="dataSource"
+    [dataSource]="meleeAttacks"
     [currentFlankingBonus]="currentFlankingBonus"
     [strengthMod]="strengthMod"
     [isHasted]="isHasted"
+    [powerAttack]="powerAttack"
 >
 </app-melee-attacks-shared>
 
@@ -48,11 +49,13 @@
 </div>
 <!-- *** -->
 
+<!-- SIZE CHANGE -->
 <app-size-change-shared
-    [meleeAttacks]="dataSource"
+    [meleeAttacks]="meleeAttacks"
     [rangedAttacks]="[]"
     [currentSize]="currentSize"
     [strengthMod]="strengthMod"
     [dexMod]="dexMod"
 >
 </app-size-change-shared>
+<!-- *** -->

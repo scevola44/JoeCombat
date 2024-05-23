@@ -7,6 +7,7 @@ import { Attack } from '../entities/Attack';
 import { ArmorClassSharedComponent } from '../shared/armor-class-shared/armor-class-shared.component';
 import { MeleeAttacksSharedComponent } from '../shared/melee-attacks-shared/melee-attacks-shared.component';
 import { SizeChangeSharedComponent } from '../shared/size-change-shared/size-change-shared.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-biruta',
@@ -28,7 +29,7 @@ export class BirutaComponent {
 
   displayedColumns: string[] = ["Arma", "Attacco", "Danni", "Bonus"];
 
-  dataSource: WeaponListing[] = [{
+  meleeAttacks: MatTableDataSource<WeaponListing> = new MatTableDataSource<WeaponListing>([{
     "Name": "Glaive Guisarme",
     "AttackBonus": 8,
     "DamageDice": "1d10",
@@ -41,7 +42,7 @@ export class BirutaComponent {
     "DamageDice": "1d8",
     "DamageBonus": 1,
     "DmgMult": 1
-  }];
+  }]);
 
   strengthMod: number = +4;
   dexMod: number = +1;
@@ -88,8 +89,6 @@ export class BirutaComponent {
     }
   ]
 
-  
-
   calcDamageBonus(bonus: number, multiplier: number){
     let powerAttackBonus = this.powerAttack  ? 4 * multiplier : 0;
     return Math.floor(this.strengthMod*multiplier + bonus + powerAttackBonus);
@@ -115,7 +114,7 @@ export class BirutaComponent {
     this.dexMod -= modifier;
 
     this.increaseDamageDice(modifier);
-    this.dataSource.forEach(a => {a.AttackBonus += -modifier});
+    this.meleeAttacks.data.forEach(a => {a.AttackBonus += -modifier});
   }
 
   toggleLeadBlades(event: any){
@@ -125,7 +124,7 @@ export class BirutaComponent {
   }
 
   increaseDamageDice(modifier: number){
-    this.dataSource.forEach(attack => {
+    this.meleeAttacks.data.forEach(attack => {
       attack.DamageDice = DamageDiceUtils.getIncreasedDamageDice(attack.DamageDice, modifier);
     });
   }
