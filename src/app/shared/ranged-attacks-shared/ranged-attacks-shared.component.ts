@@ -55,7 +55,7 @@ export class RangedAttacksSharedComponent implements OnInit{
 
     KINETIC_BLAST.Name += this.element;
     KINETIC_BLAST.DamageDice = 1 + Math.floor(this.characterLevel/2) + KINETIC_BLAST.DamageDice;
-    KINETIC_BLAST.DamageBonus = 1 + Math.floor(this.characterLevel/2) + this.maxDeckPoints;
+    KINETIC_BLAST.DamageBonus = 1 + Math.floor(this.characterLevel/2) + this.maxDeckPoints - this.dexMod;
     KINETIC_BLAST.AttackBonus += this.baseAttBonus;
 
     var weaponsList = this.dataSource.data;
