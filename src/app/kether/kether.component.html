@@ -19,8 +19,11 @@
     [isHasted]="isHasted"
     [deadlyAimActive]="deadlyAimActive"
     [withinNineMeters]="withinNineMeters"
->
-</app-ranged-attacks-shared>
+    [element]="element"
+    [maxDeckPoints]="maxDeckPoints"
+    [characterLevel]="characterLevel"
+    [baseAttBonus]="baseAttBonus"
+/>
 
 <div style="padding: 10px;">
     <mat-slide-toggle  [(ngModel)]="withinNineMeters">Entro 9m</mat-slide-toggle>

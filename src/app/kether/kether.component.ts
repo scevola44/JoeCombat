@@ -49,6 +49,10 @@ export class KetherComponent {
   isHasted: boolean = false;
   fireHandsOut: boolean = false;
 
+  characterLevel: number = 10;
+  element: string = "Fuoco";
+  maxDeckPoints: number = 4;
+  baseAttBonus: number = 7;
   dexMod: number = 5;
   rangeIncrements: number = 0;
   currentSize: number = 1;
@@ -66,13 +70,6 @@ export class KetherComponent {
     "AttackBonus": 9,
     "DamageDice": "2d12",
     "DamageBonus": 2,
-    "DmgMult": 1
-  },
-  {
-    "Name": "Ondata di Fuoco",
-    "AttackBonus": 7,
-    "DamageDice": "6d6",
-    "DamageBonus": 5,
     "DmgMult": 1
   }]);
 

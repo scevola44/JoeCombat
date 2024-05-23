@@ -16,8 +16,12 @@ import { WeaponListing } from '../../entities/WeaponListing';
 export class RangedAttacksSharedComponent implements OnInit{
 
   @Input() dataSource!: MatTableDataSource<WeaponListing>;
+  @Input() baseAttBonus!: number;
   @Input() dexMod!: number;
   @Input() isHasted!: boolean;
+  @Input() element!: string;
+  @Input() maxDeckPoints!: number
+  @Input() characterLevel!: number
 
   @Input() withinNineMeters: boolean = false;
   @Input() deadlyAimActive: boolean = false;
@@ -41,6 +45,22 @@ export class RangedAttacksSharedComponent implements OnInit{
 
   ngOnInit(): void {
     this.currentAttackIteration = this.attackIterations[0];
+
+    let KINETIC_BLAST: WeaponListing = {
+      "Name": "Ondata di ",
+      "AttackBonus": 0,
+      "DamageDice": "d6",
+      "DamageBonus": 1
+    }
+
+    KINETIC_BLAST.Name += this.element;
+    KINETIC_BLAST.DamageDice = 1 + Math.floor(this.characterLevel/2) + KINETIC_BLAST.DamageDice;
+    KINETIC_BLAST.DamageBonus = 1 + Math.floor(this.characterLevel/2) + this.maxDeckPoints;
+    KINETIC_BLAST.AttackBonus += this.baseAttBonus;
+
+    var weaponsList = this.dataSource.data;
+    weaponsList.push(KINETIC_BLAST);
+    this.dataSource.data = weaponsList;
   }
 
   calcAttackBonus(bonus: number){

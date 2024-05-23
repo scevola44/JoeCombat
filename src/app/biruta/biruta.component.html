@@ -7,8 +7,7 @@
     [strengthMod]="strengthMod"
     [isHasted]="isHasted"
     [powerAttack]="powerAttack"
->
-</app-melee-attacks-shared>
+/>
 
 <div style="padding: 10px;">
     <mat-slide-toggle (change)="toggleStrengthBonus($event, 2)">Focus Animale</mat-slide-toggle>
@@ -34,6 +33,10 @@
     [dataSource]="rangedAttacks"
     [dexMod]="dexMod"
     [isHasted]="isHasted"
+    [element]="element"
+    [maxDeckPoints]="maxDeckPoints"
+    [characterLevel]="characterLevel"
+    [baseAttBonus]="baseAttBonus"
 />
 <!-- *** -->
 

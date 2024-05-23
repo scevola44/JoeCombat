@@ -4,5 +4,5 @@ export interface WeaponListing {
   AttackBonus: number;
   DamageDice: string;
   DamageBonus: number;
-  DmgMult: number;
+  DmgMult?: number;
 }

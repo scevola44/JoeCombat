@@ -47,6 +47,10 @@ export class BirutaComponent {
     "DmgMult": 1
   }]);
 
+  characterLevel: number = 10;
+  element: string = "Terra";
+  maxDeckPoints: number = 4;
+  baseAttBonus: number = 7;
   strengthMod: number = +4;
   dexMod: number = +1;
   armorBonus: number = 6;
