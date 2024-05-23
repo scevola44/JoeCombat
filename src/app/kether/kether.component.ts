@@ -6,6 +6,7 @@ import { ArmorClassSharedComponent } from '../shared/armor-class-shared/armor-cl
 import { MeleeAttacksSharedComponent } from '../shared/melee-attacks-shared/melee-attacks-shared.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { SizeChangeSharedComponent } from '../shared/size-change-shared/size-change-shared.component';
+import { RangedAttacksSharedComponent } from '../shared/ranged-attacks-shared/ranged-attacks-shared.component';
 
 const INITIAL_MELEE_LISTING: WeaponListing[] = [{
   "Name": "Pugno d'Acciaio",
@@ -31,6 +32,7 @@ const fireHandsWeaponListing: WeaponListing = {
     FormsModule,
     ArmorClassSharedComponent,
     MeleeAttacksSharedComponent,
+    RangedAttacksSharedComponent,
     SizeChangeSharedComponent
   ],
   templateUrl: './kether.component.html',
@@ -59,7 +61,7 @@ export class KetherComponent {
   flankingBonus: number = 0;
   strengthMod: number = 2;
 
-  dataSource: WeaponListing[] = [{
+  rangedAttacks: MatTableDataSource<WeaponListing> = new MatTableDataSource<WeaponListing>([{
     "Name": "Fucile",
     "AttackBonus": 9,
     "DamageDice": "2d12",
@@ -72,7 +74,7 @@ export class KetherComponent {
     "DamageDice": "6d6",
     "DamageBonus": 5,
     "DmgMult": 1
-  }];
+  }]);
 
   meleeAttacks: MatTableDataSource<WeaponListing> = new MatTableDataSource<WeaponListing>(INITIAL_MELEE_LISTING);
 
@@ -116,10 +118,5 @@ export class KetherComponent {
     }
 
     this.meleeAttacks.data = newData;
-  }
-
-  changeRangeIncrements(steps: number){
-    this.rangeIncrements += steps;
-    if (this.rangeIncrements > 0) this.withinNineMeters = false;
   }
 }

@@ -3,6 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatRadioModule} from '@angular/material/radio';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,13 +12,15 @@ import {MatRadioModule} from '@angular/material/radio';
     MatTableModule,
     MatButtonModule,
     MatSlideToggleModule,
-    MatRadioModule
+    MatRadioModule,
+    FormsModule
   ],
   exports: [
     MatTableModule,
     MatButtonModule,
     MatSlideToggleModule,
-    MatRadioModule
+    MatRadioModule,
+    FormsModule
   ]
 })
 export class MaterialModule { }

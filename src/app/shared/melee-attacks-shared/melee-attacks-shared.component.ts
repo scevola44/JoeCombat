@@ -51,7 +51,8 @@ export class MeleeAttacksSharedComponent implements OnInit{
     + this.strengthMod
     + this.currentAttackIteration.AttackPenalty
     + this.currentFlankingBonus
-    + powerAttackPenalty;
+    + powerAttackPenalty
+    + (this.isHasted ? 1 : 0);
   }
 
   calcDamageBonus(bonus: number, multiplier: number){
@@ -85,9 +86,5 @@ export class MeleeAttacksSharedComponent implements OnInit{
     else {
       this.attackIterations.pop();
     }
-
-    console.log("HASTED?: ", this.attackIterations)
-
-    this.toggleBonus(event, 1, 0)
   }
 }

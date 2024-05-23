@@ -29,6 +29,7 @@ export class BirutaComponent {
 
   displayedColumns: string[] = ["Arma", "Attacco", "Danni", "Bonus"];
 
+  rangedAttacks: MatTableDataSource<WeaponListing> = new MatTableDataSource<WeaponListing>();
   meleeAttacks: MatTableDataSource<WeaponListing> = new MatTableDataSource<WeaponListing>([{
     "Name": "Glaive Guisarme",
     "AttackBonus": 8,

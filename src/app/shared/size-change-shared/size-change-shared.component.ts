@@ -14,7 +14,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class SizeChangeSharedComponent {
 
   @Input() meleeAttacks!: MatTableDataSource<WeaponListing>;
-  @Input() rangedAttacks!: WeaponListing[];
+  @Input() rangedAttacks!: MatTableDataSource<WeaponListing>;
   @Input() currentSize!: number;
   @Input() strengthMod!: number;
   @Input() dexMod!: number;
@@ -30,7 +30,7 @@ export class SizeChangeSharedComponent {
 
     this.increaseDamageDice(modifier);
     this.meleeAttacks.data.forEach(a => {a.AttackBonus += -modifier});
-    this.rangedAttacks.forEach(a => {a.AttackBonus += -modifier});
+    this.rangedAttacks.data.forEach(a => {a.AttackBonus += -modifier});
   }
 
   increaseDamageDice(modifier: number){
@@ -38,7 +38,7 @@ export class SizeChangeSharedComponent {
       attack.DamageDice = DamageDiceUtils.getIncreasedDamageDice(attack.DamageDice, modifier);
     });
 
-    this.rangedAttacks.forEach(attack => {
+    this.rangedAttacks.data.forEach(attack => {
       attack.DamageDice = DamageDiceUtils.getIncreasedDamageDice(attack.DamageDice, modifier);
     });
   }
