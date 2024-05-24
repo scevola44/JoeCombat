@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SizeChangeSharedComponent } from '../shared/size-change-shared/size-change-shared.component';
 import { RangedAttacksSharedComponent } from '../shared/ranged-attacks-shared/ranged-attacks-shared.component';
 import { AllWeaponAttacksSharedComponent } from '../shared';
+import { DamageDiceUtils } from '../utils/damage-dice.utils';
 
 const INITIAL_MELEE_LISTING: WeaponListing[] = [{
   "Name": "Pugno d'Acciaio",
@@ -99,6 +100,7 @@ export class KetherComponent implements AfterViewInit {
 
     if(this.fireHandsOut) {
       this.strengthMod += 5;
+      fireHandsWeaponListing.DamageDice = DamageDiceUtils.getIncreasedDamageDice(fireHandsWeaponListing.DamageDice, this.currentSize-1)
       newData.push(fireHandsWeaponListing);
     }
     if(!this.fireHandsOut) {
