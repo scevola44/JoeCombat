@@ -1,13 +1,22 @@
-<h1>Biruta</h1>
+<h1>BIRUTA</h1>
 
-<!-- MELEE -->
-<app-melee-attacks-shared
-    [dataSource]="meleeAttacks"
-    [currentFlankingBonus]="currentFlankingBonus"
+<app-all-weapon-attacks-shared
+    [meleeAttacks]="meleeAttacks"
+    [rangedAttacks]="rangedAttacks"
+    [characterLevel]="characterLevel"    
+    [element]="element"
+    [maxDeckPoints]="maxDeckPoints"
+    [baseAttBonus]="baseAttBonus"
+    [dexMod]="dexMod"
+    [currentSize]="currentSize"
+    [armorBonus]="armorBonus"
+    [shieldBonus]="shieldBonus"
+    [untypedAcBonus]="untypedAcBonus"
+    [dodgeBonus]="dodgeBonus"
     [strengthMod]="strengthMod"
-    [isHasted]="isHasted"
-    [powerAttack]="powerAttack"
-/>
+    [flankingBonus]="flankingBonus"
+    [isFlanking]="isFlanking"
+    />
 
 <div style="padding: 10px;">
     <mat-slide-toggle (change)="toggleStrengthBonus($event, 2)">Focus Animale</mat-slide-toggle>
@@ -19,7 +28,7 @@
 <div style="padding: 10px;">
     <div class="row">
         <label id="flanking">Fiancheggiamento</label>
-        <mat-radio-group [(ngModel)]="currentFlankingBonus">
+        <mat-radio-group [(ngModel)]="flankingBonus">
             @for (flankingOption of flankingOptions; track flankingOptions) {
                 <mat-radio-button class="example-radio-button" [value]="flankingOption.bonus">{{flankingOption.label}}</mat-radio-button>
             }
@@ -28,45 +37,9 @@
 </div>
 <!-- *** -->
 
-<!-- RANGED -->
-<app-ranged-attacks-shared
-    [dataSource]="rangedAttacks"
-    [dexMod]="dexMod"
-    [isHasted]="isHasted"
-    [element]="element"
-    [maxDeckPoints]="maxDeckPoints"
-    [characterLevel]="characterLevel"
-    [baseAttBonus]="baseAttBonus"
-/>
-<!-- *** -->
-
-<!-- DEFENSE -->
-<app-armor-class-shared
-    [armorBonus]="armorBonus"
-    [currentSize]="currentSize"
-    [dexMod]="dexMod"
-    [isAgainstTouch]="isAgainstTouch"
-    [shieldBonus]="shieldBonus"
-    [untypedAcBonus]="untypedAcBonus"
-    [isHasted]="isHasted"
-    [dodgeBonus]="0"
->
-</app-armor-class-shared>
-
 <div style="padding: 10px;">
     <mat-slide-toggle (change)="$event.checked ? shieldBonus = shieldBonus + 1 : shieldBonus = shieldBonus - 1">Scudo di Pietra</mat-slide-toggle>
     <mat-slide-toggle (change)="$event.checked ? armorBonus = armorBonus + 5 : armorBonus = armorBonus - 5">Ironskin</mat-slide-toggle>
     <mat-slide-toggle (change)="$event.checked ? dexMod = dexMod + 2 : dexMod = dexMod - 2">F. Animale Dex</mat-slide-toggle>
 </div>
-<!-- *** -->
-
-<!-- SIZE CHANGE -->
-<app-size-change-shared
-    [meleeAttacks]="meleeAttacks"
-    [rangedAttacks]="rangedAttacks"
-    [currentSize]="currentSize"
-    [strengthMod]="strengthMod"
-    [dexMod]="dexMod"
->
-</app-size-change-shared>
 <!-- *** -->

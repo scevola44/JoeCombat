@@ -20,24 +20,17 @@ export class MeleeAttacksSharedComponent implements OnInit{
   @Input() dataSource!: MatTableDataSource<WeaponListing>;
   @Input() strengthMod!: number;
   @Input() currentFlankingBonus!: number;
+  @Input() isFlanking!: boolean;
   @Input() isHasted!: boolean;
+  @Input() attackIterations!: Attack[];
+  @Input() currentAttackIteration!: Attack;
 
   @Input() powerAttack: boolean = false;
 
   displayedColumns: string[] = ["Arma", "Attacco", "Danni", "Bonus"];
 
-  attackIterations: Attack[] = [{
-    "AttackNumber":1,
-    "AttackPenalty": 0
-   },
-   {
-    "AttackNumber": 2,
-    "AttackPenalty": -5
-  }];
-
-  currentAttackIteration!: Attack;
-  temporaryAttMod: number = 0;
-  temporaryDmgMod: number = 0;
+  @Input() temporaryAttMod!: number;
+  @Input() temporaryDmgMod!: number;
 
   ngOnInit(): void {
     this.currentAttackIteration = this.attackIterations[0];
@@ -51,7 +44,7 @@ export class MeleeAttacksSharedComponent implements OnInit{
     return weaponAttack.AttackBonus
     + this.strengthMod
     + this.currentAttackIteration.AttackPenalty
-    + this.currentFlankingBonus
+    + (this.isFlanking ? this.currentFlankingBonus : 0)
     + powerAttackPenalty
     + (this.isHasted ? 1 : 0)
     + this.temporaryAttMod;

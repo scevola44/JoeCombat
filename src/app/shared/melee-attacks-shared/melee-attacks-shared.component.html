@@ -19,31 +19,3 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let attackRow; columns: displayedColumns;"></tr>
 </table>
-
-<div style="padding: 10px;">
-    <div class="row">
-        <label id="multiple-attacks">Attacco</label>
-        <mat-radio-group [(ngModel)]="currentAttackIteration">
-            @for (attack of attackIterations; track attack) {
-                <mat-radio-button class="example-radio-button" [value]="attack">{{attack.AttackNumber}}</mat-radio-button>
-            }
-        </mat-radio-group>
-    </div>
-
-    <mat-slide-toggle (change)="toggleBonus($event, 1, 1)">Inspire Courage</mat-slide-toggle>
-    <mat-slide-toggle (change)="toggleHaste($event)">Velocità</mat-slide-toggle>
-</div>
-
-<!-- TEMPORARY - TOREMOVE -->
-<div class="row" style="padding: 10px;">
-    <button mat-flat-button color="warn" (click)="temporaryAttMod = temporaryAttMod - 1">-</button>
-    Aggiustamento Attacco Manuale: {{ temporaryAttMod }}
-    <button mat-flat-button color="accent" (click)="temporaryAttMod = temporaryAttMod + 1">+</button>
-</div>
-
-<div class="row" style="padding: 10px;">
-    <button mat-flat-button color="warn" (click)="temporaryDmgMod = temporaryDmgMod - 1">-</button>
-    Aggiustamento Danni Manuale: {{ temporaryDmgMod }}
-    <button mat-flat-button color="accent" (click)="temporaryDmgMod = temporaryDmgMod + 1">+</button>
-</div>
-<!-- *** -->

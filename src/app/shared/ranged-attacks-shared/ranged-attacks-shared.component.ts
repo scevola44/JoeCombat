@@ -22,26 +22,19 @@ export class RangedAttacksSharedComponent implements OnInit{
   @Input() element!: string;
   @Input() maxDeckPoints!: number
   @Input() characterLevel!: number
+  @Input() attackIterations!: Attack[];
+  @Input() currentAttackIteration!: Attack;
 
   @Input() withinNineMeters: boolean = false;
   @Input() deadlyAimActive: boolean = false;
 
   displayedColumns: string[] = ["Arma", "Attacco", "Danni", "Bonus"];
 
-  attackIterations: Attack[] = [{
-    "AttackNumber":1,
-    "AttackPenalty": 0
-   },
-   {
-    "AttackNumber": 2,
-    "AttackPenalty": -5
-  }];
-
-  currentAttackIteration!: Attack;
   rangeIncrements: number = 0;
+  rangePenalty: number = 2;
 
-  temporaryAttMod: number = 0;
-  temporaryDmgMod: number = 0;
+  @Input() temporaryAttMod!: number;
+  @Input() temporaryDmgMod!: number;
 
   ngOnInit(): void {
     this.currentAttackIteration = this.attackIterations[0];
@@ -66,7 +59,7 @@ export class RangedAttacksSharedComponent implements OnInit{
   calcAttackBonus(bonus: number){
     let deadlyAimPenalty = this.deadlyAimActive ? -2 : 0;
     let preciseShotBonus = this.withinNineMeters ? +1 : 0;
-    let rangePenalty = -this.rangeIncrements;
+    let rangePenalty = -this.rangeIncrements * this.rangePenalty;
 
     return bonus
     + this.dexMod

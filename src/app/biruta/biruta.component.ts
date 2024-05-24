@@ -9,25 +9,27 @@ import { MeleeAttacksSharedComponent } from '../shared/melee-attacks-shared/mele
 import { SizeChangeSharedComponent } from '../shared/size-change-shared/size-change-shared.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { RangedAttacksSharedComponent } from '../shared/ranged-attacks-shared/ranged-attacks-shared.component';
+import { AllWeaponAttacksSharedComponent } from '../shared';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-biruta',
   standalone: true,
   imports: [
+    CommonModule,
     MaterialModule,
     FormsModule,
-    ArmorClassSharedComponent,
-    MeleeAttacksSharedComponent,
-    RangedAttacksSharedComponent,
-    SizeChangeSharedComponent
+    AllWeaponAttacksSharedComponent
   ],
   templateUrl: './biruta.component.html',
   styleUrl: './biruta.component.css'
 })
 export class BirutaComponent {
 
-  @ViewChild(ArmorClassSharedComponent) armorClassComponent!: ArmorClassSharedComponent;
-  @ViewChild(MeleeAttacksSharedComponent) attacksComponent!: MeleeAttacksSharedComponent;
+  // @ViewChild(ArmorClassSharedComponent) armorClassComponent!: ArmorClassSharedComponent;
+  // @ViewChild(MeleeAttacksSharedComponent) attacksComponent!: MeleeAttacksSharedComponent;
+
+  @ViewChild(AllWeaponAttacksSharedComponent) weaponsComponent!: AllWeaponAttacksSharedComponent;
 
   displayedColumns: string[] = ["Arma", "Attacco", "Danni", "Bonus"];
 
@@ -57,8 +59,10 @@ export class BirutaComponent {
   shieldBonus: number = 0;
   currentSize: number = 1;
   untypedAcBonus: number = 0;
+  dodgeBonus: number = 0;
 
-  currentFlankingBonus: number = 0;
+  isFlanking: boolean = false;
+  flankingBonus: number = 2;
 
   powerAttack: boolean = false;
   isHasted: boolean = false;
@@ -105,11 +109,6 @@ export class BirutaComponent {
     return this.currentAttackIteration.AttackNumber != 1;
   }
 
-  calcAttackBonus(weaponAttack: WeaponListing){
-    let powerAttackPenalty = ((this.isSecondAttack() || weaponAttack.DmgMult == 1) && this.powerAttack) ? -2 : 0;
-
-    return weaponAttack.AttackBonus + this.strengthMod + this.currentAttackIteration.AttackPenalty + this.currentFlankingBonus + powerAttackPenalty;
-  }
 
   getSize(): string {
     return DamageDiceUtils.sizeList[this.currentSize];

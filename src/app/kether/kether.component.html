@@ -1,57 +1,27 @@
-<h1>Kether</h1>
+<h1>KETHER</h1>
 
-<h4>Melee</h4>
-<app-melee-attacks-shared
-    [dataSource]="meleeAttacks"
-    [currentFlankingBonus]="flankingBonus"
+<app-all-weapon-attacks-shared
+    [meleeAttacks]="meleeAttacks"
+    [rangedAttacks]="rangedAttacks"
+    [characterLevel]="characterLevel"    
+    [element]="element"
+    [maxDeckPoints]="maxDeckPoints"
+    [baseAttBonus]="baseAttBonus"
+    [dexMod]="dexMod"
+    [currentSize]="currentSize"
+    [armorBonus]="armorBonus"
+    [shieldBonus]="shieldBonus"
+    [untypedAcBonus]="untypedAcBonus"
+    [dodgeBonus]="dodgeBonus"
     [strengthMod]="strengthMod"
-    [isHasted]="isHasted"
->
-</app-melee-attacks-shared>
+    />
 
 <div style="padding: 10px;">
     <mat-slide-toggle (change)="toggleFireHands($event)">Braccia di Brace</mat-slide-toggle>
 </div>
-
-<app-ranged-attacks-shared
-    [dataSource]="rangedAttacks"
-    [dexMod]="dexMod"
-    [isHasted]="isHasted"
-    [deadlyAimActive]="deadlyAimActive"
-    [withinNineMeters]="withinNineMeters"
-    [element]="element"
-    [maxDeckPoints]="maxDeckPoints"
-    [characterLevel]="characterLevel"
-    [baseAttBonus]="baseAttBonus"
-/>
 
 <div style="padding: 10px;">
     <mat-slide-toggle  [(ngModel)]="withinNineMeters">Entro 9m</mat-slide-toggle>
     <mat-slide-toggle [(ngModel)]="deadlyAimActive">Mira Letale</mat-slide-toggle>
     <mat-slide-toggle (change)="toggleElementalBody($event)">Corpo Elementale III</mat-slide-toggle>
 </div>
-
-<!-- SIZE CHANGE -->
-<app-size-change-shared
-    [meleeAttacks]="meleeAttacks"
-    [rangedAttacks]="rangedAttacks"
-    [currentSize]="currentSize"
-    [strengthMod]="strengthMod"
-    [dexMod]="dexMod"
->
-</app-size-change-shared>
-<!-- *** -->
-
-<!-- DEFENSE -->
-<app-armor-class-shared
-    [armorBonus]="armorBonus"
-    [currentSize]="currentSize"
-    [dexMod]="dexMod"
-    [isAgainstTouch]="isAgainstTouch"
-    [shieldBonus]="shieldBonus"
-    [untypedAcBonus]="untypedAcBonus"
-    [isHasted]="isHasted"
-    [dodgeBonus]="dodgeBonus"
->
-</app-armor-class-shared>
-<!-- *** -->

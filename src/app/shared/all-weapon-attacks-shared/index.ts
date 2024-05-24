@@ -1,0 +1,1 @@
+export * from './all-weapon-attacks-shared.component'

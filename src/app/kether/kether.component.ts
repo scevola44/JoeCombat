@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { WeaponListing } from '../entities/WeaponListing';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
@@ -7,6 +7,7 @@ import { MeleeAttacksSharedComponent } from '../shared/melee-attacks-shared/mele
 import { MatTableDataSource } from '@angular/material/table';
 import { SizeChangeSharedComponent } from '../shared/size-change-shared/size-change-shared.component';
 import { RangedAttacksSharedComponent } from '../shared/ranged-attacks-shared/ranged-attacks-shared.component';
+import { AllWeaponAttacksSharedComponent } from '../shared';
 
 const INITIAL_MELEE_LISTING: WeaponListing[] = [{
   "Name": "Pugno d'Acciaio",
@@ -30,6 +31,7 @@ const fireHandsWeaponListing: WeaponListing = {
   imports: [
     MaterialModule,
     FormsModule,
+    AllWeaponAttacksSharedComponent,
     ArmorClassSharedComponent,
     MeleeAttacksSharedComponent,
     RangedAttacksSharedComponent,
@@ -38,11 +40,14 @@ const fireHandsWeaponListing: WeaponListing = {
   templateUrl: './kether.component.html',
   styleUrl: './kether.component.css'
 })
-export class KetherComponent {
+export class KetherComponent implements AfterViewInit {
 
-  @ViewChild(ArmorClassSharedComponent) armorClassComponent!: ArmorClassSharedComponent;
-  @ViewChild(MeleeAttacksSharedComponent) meleeAttacksComponent!: MeleeAttacksSharedComponent;
-  @ViewChild(SizeChangeSharedComponent) sizeChangeComponent!: SizeChangeSharedComponent;
+  // @ViewChild(ArmorClassSharedComponent) armorClassComponent!: ArmorClassSharedComponent;
+  // @ViewChild(MeleeAttacksSharedComponent) meleeAttacksComponent!: MeleeAttacksSharedComponent;
+  // @ViewChild(RangedAttacksSharedComponent) rangedAttacksComponent!: RangedAttacksSharedComponent;
+  // @ViewChild(SizeChangeSharedComponent) sizeChangeComponent!: SizeChangeSharedComponent;
+
+  @ViewChild(AllWeaponAttacksSharedComponent) weaponAttacksComponent!: AllWeaponAttacksSharedComponent;
 
   deadlyAimActive: boolean = false;
   withinNineMeters: boolean = false;
@@ -77,28 +82,15 @@ export class KetherComponent {
 
   displayedColumns: string[] = ["Arma", "Attacco", "Danni", "Bonus"];
 
-  calcAttackBonus(bonus: number){
-    let deadlyAimMalus = this.deadlyAimActive ? -2 : 0;
-    let preciseShotBonus = this.withinNineMeters ? +1 : 0;
-    let rangePenalty = -this.rangeIncrements;
-
-    return bonus + this.dexMod + deadlyAimMalus + preciseShotBonus + rangePenalty;
+  ngAfterViewInit(): void {
+    this.weaponAttacksComponent.rangedAttacksComponent.rangePenalty = 1;
   }
-
-  calcDamageBonus(bonus: number){
-    let deadlyAimBonus = this.deadlyAimActive ? 4 : 0;
-    let preciseShotBonus = this.withinNineMeters ? +1 : 0;
-
-    return bonus + this.dexMod + deadlyAimBonus + preciseShotBonus;
-  }
-
 
   toggleElementalBody(event: any){
     let modifier = event.checked ? 1 : -1;
-    this.sizeChangeComponent.changeSize(modifier);
+    this.weaponAttacksComponent.sizeChangeComponent.changeSize(modifier);
 
     this.dexMod += modifier*2;
-    this.meleeAttacksComponent.toggleBonus(event, 1, 0);
   }
 
   toggleFireHands(event: any) {

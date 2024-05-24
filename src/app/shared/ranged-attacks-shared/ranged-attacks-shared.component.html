@@ -1,5 +1,4 @@
-<h4>Ranged</h4>
-<table mat-table [dataSource]="dataSource">
+<table mat-table [dataSource]="dataSource" style="padding: 10px;">
     <ng-container matColumnDef="Arma">
         <th mat-header-cell *matHeaderCellDef> Arma </th>
         <td mat-cell *matCellDef="let attack"> {{attack.Name}} </td>
@@ -20,23 +19,3 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let attackRow; columns: displayedColumns;"></tr>
 </table>
-
-<div class="row" style="padding: 10px;">
-    <button mat-flat-button color="warn" (click)="changeRangeIncrements(-1)">-</button>
-    Incrementi di Gittata: {{ rangeIncrements }}
-    <button mat-flat-button color="primary" (click)="changeRangeIncrements(1)">+</button>
-</div>
-
-<!-- TEMPORARY - TOREMOVE -->
-<div class="row" style="padding: 10px;">
-    <button mat-flat-button color="warn" (click)="temporaryAttMod = temporaryAttMod - 1">-</button>
-    Aggiustamento Attacco Manuale: {{ temporaryAttMod }}
-    <button mat-flat-button color="accent" (click)="temporaryAttMod = temporaryAttMod + 1">+</button>
-</div>
-
-<div class="row" style="padding: 10px;">
-    <button mat-flat-button color="warn" (click)="temporaryDmgMod = temporaryDmgMod - 1">-</button>
-    Aggiustamento Danni Manuale: {{ temporaryDmgMod }}
-    <button mat-flat-button color="accent" (click)="temporaryDmgMod = temporaryDmgMod + 1">+</button>
-</div>
-<!-- *** -->
