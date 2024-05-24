@@ -42,7 +42,7 @@ export class AllWeaponAttacksSharedComponent {
 
   currentAttackIteration!: Attack;
 
-  deadlyAimActive: boolean = false;
+  @Input() deadlyAimActive: boolean = false;
   withinNineMeters: boolean = false;
   isHasted: boolean = false;
 

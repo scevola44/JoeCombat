@@ -31,14 +31,12 @@
 <!-- *** -->
 
 <!-- FLANKING -->
-<div style="padding: 10px;">
-    <div class="row">
-        <label id="flanking">Fiancheggiamento</label>
-        <mat-radio-group [(ngModel)]="flankingBonus">
-            @for (flankingOption of flankingOptions; track flankingOptions) {
-                <mat-radio-button class="example-radio-button" [value]="flankingOption.bonus">{{flankingOption.label}}</mat-radio-button>
-            }
-        </mat-radio-group>
-    </div>
+<div class="row" style="padding: 10px;">
+    <label id="flanking">Fiancheggiamento</label>
+    <mat-radio-group [(ngModel)]="flankingBonus">
+        @for (flankingOption of flankingOptions; track flankingOptions) {
+            <mat-radio-button class="example-radio-button" [value]="flankingOption.bonus">{{flankingOption.label}}</mat-radio-button>
+        }
+    </mat-radio-group>
 </div>
 <!-- *** -->
