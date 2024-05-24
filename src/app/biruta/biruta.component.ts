@@ -139,7 +139,6 @@ export class BirutaComponent {
     let modifier = event.checked ? 1 : -1;
 
     this.strengthMod += modifier*3;
-    this.dexMod -= modifier;
     this.armorBonus += modifier*6;
 
     this.changeSize(modifier);
