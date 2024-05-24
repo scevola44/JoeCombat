@@ -18,13 +18,19 @@
     [isFlanking]="isFlanking"
     />
 
+<!-- TOGGLES -->
 <div style="padding: 10px;">
     <mat-slide-toggle (change)="toggleStrengthBonus($event, 2)">Focus Animale</mat-slide-toggle>
     <mat-slide-toggle [(ngModel)]="powerAttack">Power Attack</mat-slide-toggle>
     <mat-slide-toggle (change)="toggleLeadBlades($event)">Lead Blades</mat-slide-toggle>
     <mat-slide-toggle (change)="toggleElementalBody($event)">Corpo Elementale III</mat-slide-toggle>
+    <mat-slide-toggle (change)="$event.checked ? shieldBonus = shieldBonus + 1 : shieldBonus = shieldBonus - 1">Scudo di Pietra</mat-slide-toggle>
+    <mat-slide-toggle (change)="$event.checked ? armorBonus = armorBonus + 5 : armorBonus = armorBonus - 5">Ironskin</mat-slide-toggle>
+    <mat-slide-toggle (change)="$event.checked ? dexMod = dexMod + 2 : dexMod = dexMod - 2">F. Animale Dex</mat-slide-toggle>
 </div>
+<!-- *** -->
 
+<!-- FLANKING -->
 <div style="padding: 10px;">
     <div class="row">
         <label id="flanking">Fiancheggiamento</label>
@@ -34,12 +40,5 @@
             }
         </mat-radio-group>
     </div>
-</div>
-<!-- *** -->
-
-<div style="padding: 10px;">
-    <mat-slide-toggle (change)="$event.checked ? shieldBonus = shieldBonus + 1 : shieldBonus = shieldBonus - 1">Scudo di Pietra</mat-slide-toggle>
-    <mat-slide-toggle (change)="$event.checked ? armorBonus = armorBonus + 5 : armorBonus = armorBonus - 5">Ironskin</mat-slide-toggle>
-    <mat-slide-toggle (change)="$event.checked ? dexMod = dexMod + 2 : dexMod = dexMod - 2">F. Animale Dex</mat-slide-toggle>
 </div>
 <!-- *** -->

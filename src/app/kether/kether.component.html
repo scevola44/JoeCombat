@@ -16,12 +16,11 @@
     [strengthMod]="strengthMod"
     />
 
+<!-- TOGGLES -->
 <div style="padding: 10px;">
     <mat-slide-toggle (change)="toggleFireHands($event)">Braccia di Brace</mat-slide-toggle>
-</div>
-
-<div style="padding: 10px;">
     <mat-slide-toggle  [(ngModel)]="withinNineMeters">Entro 9m</mat-slide-toggle>
     <mat-slide-toggle [(ngModel)]="deadlyAimActive">Mira Letale</mat-slide-toggle>
     <mat-slide-toggle (change)="toggleElementalBody($event)">Corpo Elementale III</mat-slide-toggle>
 </div>
+<!-- *** -->

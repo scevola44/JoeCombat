@@ -32,4 +32,9 @@ $light-theme: mat.define-light-theme(
     background-color: rgb(188, 46, 39) !important;
 }
 
+.mdc-switch{
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+}
+
 @include mat.all-component-themes($light-theme);
