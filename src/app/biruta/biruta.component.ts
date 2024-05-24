@@ -44,7 +44,7 @@ export class BirutaComponent {
   {
     "Name": "Mazza",
     "AttackBonus": 8,
-    "DamageDice": "1d8",
+    "DamageDice": "1d6",
     "DamageBonus": 1,
     "DmgMult": 1
   }]);
