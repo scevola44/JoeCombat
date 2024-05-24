@@ -34,6 +34,7 @@ export abstract class DamageDiceUtils {
     ]
 
     public static getIncreasedDamageDice(currentDie: string, sizeChange: number): string{
+        if(sizeChange == 0) return currentDie;
         if (currentDie.endsWith("d12")){
             let x = currentDie.split('d');
             let numberOfDice: number = +x[0];
