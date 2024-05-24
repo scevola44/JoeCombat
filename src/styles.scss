@@ -36,5 +36,9 @@ $light-theme: mat.define-light-theme(
     margin-left: 5px !important;
     margin-right: 5px !important;
 }
+
+.mdc-button {
+    margin: 5px !important;
+}
    
 @include mat.all-component-themes($light-theme);
