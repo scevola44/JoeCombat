@@ -44,7 +44,7 @@ export class BirutaComponent {
   {
     "Name": "Mazza",
     "AttackBonus": 8,
-    "DamageDice": "1d8",
+    "DamageDice": "1d6",
     "DamageBonus": 1,
     "DmgMult": 1
   }]);
@@ -139,7 +139,6 @@ export class BirutaComponent {
     let modifier = event.checked ? 1 : -1;
 
     this.strengthMod += modifier*3;
-    this.dexMod -= modifier;
     this.armorBonus += modifier*6;
 
     this.changeSize(modifier);
