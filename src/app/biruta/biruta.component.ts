@@ -53,7 +53,6 @@ export class BirutaComponent {
   untypedAcBonus: number = 0;
   dodgeBonus: number = 0;
 
-  isFlanking: boolean = false;
   flankingBonus: number = 2;
 
   powerAttack: boolean = false;

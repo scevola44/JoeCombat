@@ -62,6 +62,7 @@ export class KetherComponent {
   shieldBonus: number = 0;
   untypedAcBonus: number = 0;
   dodgeBonus: number = 1;
+  isFlanking: boolean = false;
   flankingBonus: number = 0;
 
   get sizeSteps(): number {
@@ -109,6 +110,11 @@ export class KetherComponent {
   toggleFireHands(event: any) {
     this.fireHandsOut = event.checked;
     this.rebuildMeleeWeapons();
+  }
+
+  toggleFlanking(event: any) {
+    this.isFlanking = event.checked;
+    this.flankingBonus = event.checked ? 2 : 0;
   }
 
   private rebuildMeleeWeapons() {

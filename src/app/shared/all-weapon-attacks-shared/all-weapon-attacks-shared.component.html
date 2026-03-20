@@ -7,7 +7,6 @@
     [currentAttackIteration]="currentAttackIteration"
     [temporaryAttMod]="temporaryAttMod"
     [temporaryDmgMod]="temporaryDmgMod"
-    [isFlanking]="isFlanking"
     [sizeSteps]="effectiveSizeSteps"
     [damageDiceSteps]="meleeDiceSteps"
 />
@@ -41,7 +40,6 @@
 
     <mat-slide-toggle (change)="toggleBonus($event, 1, 1)">Inspire Courage</mat-slide-toggle>
     <mat-slide-toggle (change)="toggleHaste($event)">Velocità</mat-slide-toggle>
-    <mat-slide-toggle [(ngModel)]="isFlanking">Fiancheggiamento</mat-slide-toggle>
 </div>
 <!-- *** -->
 

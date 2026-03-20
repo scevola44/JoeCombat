@@ -60,7 +60,6 @@ export class AllWeaponAttacksSharedComponent {
   @Input() dodgeBonus!: number;
   @Input() flankingBonus: number = 2;
   @Input() strengthMod!: number;
-  @Input() isFlanking: boolean = false;
   @Input() sizeSteps: number = 0;
   @Input() meleeDiceSteps: number = 0;
 

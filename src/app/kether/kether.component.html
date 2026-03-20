@@ -3,7 +3,7 @@
 <app-all-weapon-attacks-shared
     [meleeAttacks]="meleeAttacks"
     [rangedAttacks]="rangedAttacks"
-    [characterLevel]="characterLevel"    
+    [characterLevel]="characterLevel"
     [element]="element"
     [maxDeckPoints]="maxDeckPoints"
     [baseAttBonus]="baseAttBonus"
@@ -14,6 +14,7 @@
     [untypedAcBonus]="untypedAcBonus"
     [dodgeBonus]="dodgeBonus"
     [strengthMod]="strengthMod"
+    [flankingBonus]="flankingBonus"
     [deadlyAimActive]="deadlyAimActive"
     [sizeSteps]="sizeSteps"
     [meleeDiceSteps]="meleeDiceSteps"
@@ -26,5 +27,6 @@
     <mat-slide-toggle [(ngModel)]="deadlyAimActive">Mira Letale</mat-slide-toggle>
     <mat-slide-toggle (change)="toggleElementalBody($event)">Corpo Elementale III</mat-slide-toggle>
     <mat-slide-toggle (change)="untypedAcBonus = $event.checked ? untypedAcBonus + 4 : untypedAcBonus - 4 ">Manifestazione Legata</mat-slide-toggle>
+    <mat-slide-toggle (change)="toggleFlanking($event)">Fiancheggiamento</mat-slide-toggle>
 </div>
 <!-- *** -->

@@ -21,7 +21,6 @@ export class MeleeAttacksSharedComponent implements OnInit{
   @Input() dataSource!: MatTableDataSource<WeaponListing>;
   @Input() strengthMod!: number;
   @Input() currentFlankingBonus!: number;
-  @Input() isFlanking!: boolean;
   @Input() isHasted!: boolean;
   @Input() attackIterations!: Attack[];
   @Input() currentAttackIteration!: Attack;
@@ -47,7 +46,7 @@ export class MeleeAttacksSharedComponent implements OnInit{
     return weaponAttack.AttackBonus
     + this.strengthMod
     + this.currentAttackIteration.AttackPenalty
-    + (this.isFlanking ? this.currentFlankingBonus : 0)
+    + this.currentFlankingBonus
     + powerAttackPenalty
     + (this.isHasted ? 1 : 0)
     + this.temporaryAttMod
