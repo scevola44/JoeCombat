@@ -67,6 +67,7 @@ export class RangedAttacksSharedComponent implements OnInit{
     + this.currentAttackIteration.AttackPenalty
     + preciseShotBonus
     + rangePenalty
+    + (this.isHasted ? 1 : 0)
     + this.temporaryAttMod;
   }
 
@@ -94,7 +95,7 @@ export class RangedAttacksSharedComponent implements OnInit{
   }
 
   changeRangeIncrements(steps: number){
-    this.rangeIncrements += steps;
+    this.rangeIncrements = Math.max(0, this.rangeIncrements + steps);
     if (this.rangeIncrements > 0) this.withinNineMeters = false;
   }
 }

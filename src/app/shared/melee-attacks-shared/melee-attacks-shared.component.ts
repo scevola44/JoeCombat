@@ -77,20 +77,4 @@ export class MeleeAttacksSharedComponent implements OnInit{
     }
     this.dataSource.data.forEach(a => {a.AttackBonus += attack; a.DamageBonus += damage});
   }
-
-  toggleHaste(event: any){
-    this.isHasted = event.checked;
-
-    if (this.isHasted){
-      let lastAttack: Attack = {
-        "AttackNumber": this.attackIterations[this.attackIterations.length-1].AttackNumber +1,
-        "AttackPenalty": this.attackIterations[0].AttackPenalty
-      }
-
-      this.attackIterations.push(lastAttack);
-    }
-    else {
-      this.attackIterations.pop();
-    }
-  }
 }

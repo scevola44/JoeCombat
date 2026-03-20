@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { WeaponListing } from '../../entities/WeaponListing';
 import { MaterialModule } from '../../material/material.module';
 import { Attack } from '../../entities/Attack';
+import { AttackUtils } from '../../utils/attack-utils';
 
 @Component({
   selector: 'app-all-weapon-attacks-shared',
@@ -88,11 +89,12 @@ export class AllWeaponAttacksSharedComponent {
   }
 
   toggleHaste(event: any) {
-    this.meleeAttacksComponent.toggleHaste(event);
-    // this.rangedAttacksComponent.toggleHaste(event);
+    this.isHasted = event.checked;
+    AttackUtils.toggleHastenAttackIterations(this.attackIterations, this.isHasted);
   }
 
   changeRangeIncrements(step: number){
+    this.rangeIncrements = Math.max(0, this.rangeIncrements + step);
     this.rangedAttacksComponent.changeRangeIncrements(step);
   }
 }
