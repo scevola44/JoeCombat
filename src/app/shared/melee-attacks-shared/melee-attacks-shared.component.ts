@@ -4,6 +4,7 @@ import { MaterialModule } from '../../material/material.module';
 import { Attack } from '../../entities/Attack';
 import { FormsModule } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
+import { DamageDiceUtils } from '../../utils/damage-dice.utils';
 
 @Component({
   selector: 'app-melee-attacks-shared',
@@ -31,6 +32,8 @@ export class MeleeAttacksSharedComponent implements OnInit{
 
   @Input() temporaryAttMod!: number;
   @Input() temporaryDmgMod!: number;
+  @Input() sizeSteps: number = 0;
+  @Input() damageDiceSteps: number = 0;
 
   ngOnInit(): void {
     this.currentAttackIteration = this.attackIterations[0];
@@ -47,7 +50,8 @@ export class MeleeAttacksSharedComponent implements OnInit{
     + (this.isFlanking ? this.currentFlankingBonus : 0)
     + powerAttackPenalty
     + (this.isHasted ? 1 : 0)
-    + this.temporaryAttMod;
+    + this.temporaryAttMod
+    - this.sizeSteps;
   }
 
   calcDamageBonus(bonus: number, multiplier: number){
@@ -56,6 +60,10 @@ export class MeleeAttacksSharedComponent implements OnInit{
     + bonus
     + powerAttackBonus
     + this.temporaryDmgMod;
+  }
+
+  getEffectiveDice(baseDice: string): string {
+    return DamageDiceUtils.getIncreasedDamageDice(baseDice, this.sizeSteps + this.damageDiceSteps);
   }
 
   isSecondAttack(){

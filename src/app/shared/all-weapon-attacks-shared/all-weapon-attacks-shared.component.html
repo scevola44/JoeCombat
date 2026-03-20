@@ -8,6 +8,8 @@
     [temporaryAttMod]="temporaryAttMod"
     [temporaryDmgMod]="temporaryDmgMod"
     [isFlanking]="isFlanking"
+    [sizeSteps]="effectiveSizeSteps"
+    [damageDiceSteps]="meleeDiceSteps"
 />
 
 <app-ranged-attacks-shared
@@ -53,11 +55,8 @@
 
 <!-- SIZE CHANGE -->
 <app-size-change-shared
-    [meleeAttacks]="meleeAttacks"
-    [rangedAttacks]="rangedAttacks"
-    [currentSize]="currentSize"
-    [strengthMod]="strengthMod"
-    [dexMod]="dexMod"
+    [currentSize]="effectiveCurrentSize"
+    (adjust)="onManualSizeAdjust($event)"
 >
 </app-size-change-shared>
 <!-- *** -->
@@ -77,7 +76,7 @@
 <!-- DEFENSE -->
 <app-armor-class-shared
     [armorBonus]="armorBonus"
-    [currentSize]="currentSize"
+    [currentSize]="effectiveCurrentSize"
     [dexMod]="dexMod"
     [isAgainstTouch]="isAgainstTouch"
     [shieldBonus]="shieldBonus"

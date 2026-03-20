@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { WeaponListing } from '../entities/WeaponListing';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
@@ -8,7 +8,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SizeChangeSharedComponent } from '../shared/size-change-shared/size-change-shared.component';
 import { RangedAttacksSharedComponent } from '../shared/ranged-attacks-shared/ranged-attacks-shared.component';
 import { AllWeaponAttacksSharedComponent } from '../shared';
-import { DamageDiceUtils } from '../utils/damage-dice.utils';
 
 const INITIAL_MELEE_LISTING: WeaponListing[] = [{
   "Name": "Pugno d'Acciaio",
@@ -18,7 +17,7 @@ const INITIAL_MELEE_LISTING: WeaponListing[] = [{
   "DmgMult": 1
 }];
 
-const fireHandsWeaponListing: WeaponListing = {
+const FIRE_HANDS_WEAPON: WeaponListing = {
   "Name": "Braccia di Brace",
   "AttackBonus": 7,
   "DamageDice": "2d10",
@@ -41,27 +40,22 @@ const fireHandsWeaponListing: WeaponListing = {
   templateUrl: './kether.component.html',
   styleUrl: './kether.component.css'
 })
-export class KetherComponent implements AfterViewInit {
-
-  // @ViewChild(ArmorClassSharedComponent) armorClassComponent!: ArmorClassSharedComponent;
-  // @ViewChild(MeleeAttacksSharedComponent) meleeAttacksComponent!: MeleeAttacksSharedComponent;
-  // @ViewChild(RangedAttacksSharedComponent) rangedAttacksComponent!: RangedAttacksSharedComponent;
-  // @ViewChild(SizeChangeSharedComponent) sizeChangeComponent!: SizeChangeSharedComponent;
-
-  @ViewChild(AllWeaponAttacksSharedComponent) weaponAttacksComponent!: AllWeaponAttacksSharedComponent;
+export class KetherComponent {
 
   deadlyAimActive: boolean = false;
   withinNineMeters: boolean = false;
   isHasted: boolean = false;
   fireHandsOut: boolean = false;
+  elementalBodyActive: boolean = false;
 
   characterLevel: number = 10;
   element: string = "Fuoco";
   maxDeckPoints: number = 4;
   baseAttBonus: number = 7;
-  dexMod: number = 5;
   rangeIncrements: number = 0;
-  currentSize: number = 1;
+
+  readonly baseStrengthMod: number = 2;
+  readonly baseDexMod: number = 5;
 
   armorBonus: number = 3;
   isAgainstTouch: boolean = false;
@@ -69,7 +63,30 @@ export class KetherComponent implements AfterViewInit {
   untypedAcBonus: number = 0;
   dodgeBonus: number = 1;
   flankingBonus: number = 0;
-  strengthMod: number = 2;
+
+  get sizeSteps(): number {
+    return this.elementalBodyActive ? 1 : 0;
+  }
+
+  get currentSize(): number {
+    return 1 + this.sizeSteps;
+  }
+
+  get strengthMod(): number {
+    return this.baseStrengthMod
+      + (this.fireHandsOut ? 5 : 0)
+      + this.sizeSteps;
+  }
+
+  get dexMod(): number {
+    return this.baseDexMod
+      + (this.elementalBodyActive ? 2 : 0)
+      - this.sizeSteps;
+  }
+
+  get meleeDiceSteps(): number {
+    return this.sizeSteps;
+  }
 
   rangedAttacks: MatTableDataSource<WeaponListing> = new MatTableDataSource<WeaponListing>([{
     "Name": "Fucile",
@@ -79,35 +96,24 @@ export class KetherComponent implements AfterViewInit {
     "DmgMult": 1
   }]);
 
-  meleeAttacks: MatTableDataSource<WeaponListing> = new MatTableDataSource<WeaponListing>(INITIAL_MELEE_LISTING);
+  meleeAttacks: MatTableDataSource<WeaponListing> = new MatTableDataSource<WeaponListing>(
+    [...INITIAL_MELEE_LISTING]
+  );
 
   displayedColumns: string[] = ["Arma", "Attacco", "Danni", "Bonus"];
 
-  ngAfterViewInit(): void {
-    this.weaponAttacksComponent.rangedAttacksComponent.rangePenalty = 1;
-  }
-
-  toggleElementalBody(event: any){
-    let modifier = event.checked ? 1 : -1;
-    this.weaponAttacksComponent.sizeChangeComponent.changeSize(modifier);
-
-    this.dexMod += modifier*2;
+  toggleElementalBody(event: any) {
+    this.elementalBodyActive = event.checked;
   }
 
   toggleFireHands(event: any) {
     this.fireHandsOut = event.checked;
-    let newData = this.meleeAttacks.data;
+    this.rebuildMeleeWeapons();
+  }
 
-    if(this.fireHandsOut) {
-      this.strengthMod += 5;
-      fireHandsWeaponListing.DamageDice = DamageDiceUtils.getIncreasedDamageDice(fireHandsWeaponListing.DamageDice, this.currentSize-1)
-      newData.push(fireHandsWeaponListing);
-    }
-    if(!this.fireHandsOut) {
-      this.strengthMod -= 5;
-      newData.pop();
-    }
-
-    this.meleeAttacks.data = newData;
+  private rebuildMeleeWeapons() {
+    const data: WeaponListing[] = [...INITIAL_MELEE_LISTING];
+    if (this.fireHandsOut) data.push(FIRE_HANDS_WEAPON);
+    this.meleeAttacks.data = data;
   }
 }

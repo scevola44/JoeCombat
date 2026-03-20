@@ -60,11 +60,27 @@ export class AllWeaponAttacksSharedComponent {
   @Input() flankingBonus: number = 2;
   @Input() strengthMod!: number;
   @Input() isFlanking: boolean = false;
+  @Input() sizeSteps: number = 0;
+  @Input() meleeDiceSteps: number = 0;
+
+  manualSizeAdjustment: number = 0;
+
+  get effectiveSizeSteps(): number {
+    return this.sizeSteps + this.manualSizeAdjustment;
+  }
+
+  get effectiveCurrentSize(): number {
+    return this.currentSize + this.manualSizeAdjustment;
+  }
 
   isAgainstTouch: boolean = false;
 
   temporaryAttMod: number = 0;
   temporaryDmgMod: number = 0;
+
+  onManualSizeAdjust(delta: number) {
+    this.manualSizeAdjustment += delta;
+  }
 
   toggleBonus(event: any, attack: number, damage: number){
     this.meleeAttacksComponent.toggleBonus(event, attack,damage);
